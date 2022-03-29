@@ -1,0 +1,32 @@
+@font-face {
+	font-family: 'RobotoSlab-Black'; 
+	src: url(./RobotoSlab-Black.ttf); 
+}
+@font-face {
+	font-family: 'RobotoSlab-Bold'; 
+	src: url(./RobotoSlab-Bold.ttf); 
+}
+@font-face {
+	font-family: 'RobotoSlab-ExtraBold'; 
+	src: url(./RobotoSlab-ExtraBold.ttf); 
+}
+@font-face {
+	font-family: 'RobotoSlab-ExtraLight'; 
+	src: url(./RobotoSlab-ExtraLight.ttf); 
+}
+@font-face {
+	font-family: 'RobotoSlab-Light'; 
+	src: url(./RobotoSlab-Light.ttf); 
+}
+@font-face {
+	font-family: 'RobotoSlab-Medium'; 
+	src: url(./RobotoSlab-Medium.ttf); 
+}
+@font-face {
+	font-family: 'RobotoSlab-Regular'; 
+	src: url(./RobotoSlab-Regular.ttf); 
+}
+@font-face {
+	font-family: 'RobotoSlab-Thin'; 
+	src: url(./RobotoSlab-Thin.ttf); 
+}

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UCS.DbProvider", "UCS.DbProvider\UCS.DbProvider.csproj", "{58D59412-7D3C-4B44-9751-8C1A70196EC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCS.WebApi", "UCS.WebApi\UCS.WebApi.csproj", "{EB27D855-606C-4628-A1D9-05C3F9DC38EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58D59412-7D3C-4B44-9751-8C1A70196EC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58D59412-7D3C-4B44-9751-8C1A70196EC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58D59412-7D3C-4B44-9751-8C1A70196EC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58D59412-7D3C-4B44-9751-8C1A70196EC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB27D855-606C-4628-A1D9-05C3F9DC38EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB27D855-606C-4628-A1D9-05C3F9DC38EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB27D855-606C-4628-A1D9-05C3F9DC38EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB27D855-606C-4628-A1D9-05C3F9DC38EE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B8BC82D7-0449-4E96-B742-73EB75B4B04B}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,97 @@
+.regContainer {
+    position: relative;
+    height: 600px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    form {
+        position: relative;
+        width: 450px;
+        height: 330px;
+        border: 1px solid gray;
+        border-radius: 5%;
+        padding: 40px 20px;
+        background-color: #ADB5BD;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        grid-gap: 20px;
+
+        h1 {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+        }
+
+        .dataWrapper {
+            display: flex;
+            flex-direction: column;
+            grid-gap: 10px;
+
+            div {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                label {
+                    margin-right: 10px;
+                    text-align: center;
+                    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                }
+
+                input {
+                    width: 250px;
+                    border-radius: 5px;
+                    height: 30px;
+                    padding: 0 10px;
+                }
+            }
+        }
+
+        .btnsubmit {
+            justify-self: center;
+            align-self: center;
+            width: 200px;
+            height: 50px;
+            background-color: #808080;
+            outline: none;
+            border-radius: 5px;
+            border: 2px solid transparent;
+            transition: all .2s ease-in;
+        }
+
+        .btnsubmit:hover {
+            background-color: #a8a8a8;
+            border: 2px solid rgb(163, 163, 163);
+            color: rgb(238, 238, 238)
+        }
+
+        .btnsubmit:active {
+            background-color: #a8a8a8;
+            border: 2px solid rgb(185, 185, 185);
+        }
+
+        .loginRedirect {
+            position: absolute;
+            bottom: 5px;
+            right: 10px;
+            background-color: transparent;
+            border: 0px;
+            border-radius: 10px;
+            transition: all .1s ease-in;
+            line-height: 110%;
+
+            &:hover {
+                color: rgb(228, 228, 228)
+            }
+
+            &:active {
+                color: rgb(255, 255, 255)
+            }
+        }
+    }
+}

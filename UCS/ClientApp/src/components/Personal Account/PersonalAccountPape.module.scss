@@ -1,0 +1,70 @@
+.accountWrapper {
+    // width: 100vw;
+    display: flex;
+    flex-direction: column;
+    padding: 50px 50px 0 50px;
+
+    .personalData {
+        background-color: #6C757D;
+        min-height: 600px;
+        padding: 20px 50px;
+        display: flex;
+        flex-direction: column;
+        grid-gap: 10px;
+        border-radius: 5px;
+        
+        .dataWrapper{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            align-items: center;
+
+        }
+
+        .userfriendlypers {
+            padding: 40px;
+            border: 2px solid #DEE2E6;
+            border-radius: 10px 60px;
+            box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            h2, h4{
+                text-align: center;
+            }
+            h2{
+                color: #ffffff
+            }
+            h4{
+                color: #acacac
+            }
+        }
+
+        .userinfo{
+            border: 2px solid #DEE2E6;
+            border-radius: 60px 10px;
+            padding: 40px;
+            box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        }
+
+        h1 {
+            text-align: center;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-weight: bold;
+        }
+
+        span h3 {
+            font-size: 15px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            color: #acacac
+        }
+
+        span p {
+            font-size: 18px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            color: #ffffff
+        }
+    }
+}

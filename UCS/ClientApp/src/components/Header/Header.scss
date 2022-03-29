@@ -1,0 +1,23 @@
+.head{
+    width: 100vw;
+    background-color: #212529;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 20px;
+    font-family: 'RobotoSlab-ExtraLight' !important;
+    transition: all .3s ease-in;
+
+
+    .activeLink{
+        border-bottom: 1px solid rgb(231, 231, 231);
+        transition: all .3s ease-in;
+    }
+
+    .nonActiveLink{
+        border-bottom: 1px solid transparent;
+        transition: all .3s ease-in;
+
+    }
+}
