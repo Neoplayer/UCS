@@ -78,4 +78,7 @@ app.UseAuthorization();
 app.UseCors(MyAllowSpecificOrigins);
 app.MapControllers();
 
+// custom jwt auth middleware
+app.UseMiddleware<JwtMiddleware>();
+
 app.Run();

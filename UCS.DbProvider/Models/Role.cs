@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
 namespace UCS.DbProvider.Models
@@ -10,6 +11,7 @@ namespace UCS.DbProvider.Models
         public string Name { get; set; }
 
         [JsonIgnore]
+        [IgnoreDataMember] 
         public virtual ICollection<User> Users { get; set; }
     }
 }

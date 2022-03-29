@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
 namespace UCS.DbProvider.Models
@@ -25,6 +26,7 @@ namespace UCS.DbProvider.Models
         public DateTime RegistrationDate { get; set; }
         
         [JsonIgnore]
+        [IgnoreDataMember] 
         public virtual ICollection<Role> Roles { get; set; }
     }
 }

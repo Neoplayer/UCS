@@ -1,6 +1,7 @@
 using System;
 using System.Text.Json.Serialization;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace UCS.DbProvider.Models;
 
@@ -21,7 +22,9 @@ public class Question
     public bool Active { get; set; }
 
     [JsonIgnore]
+    [IgnoreDataMember] 
     public ICollection<Grade> Grades { get; set; }
     [JsonIgnore]
+    [IgnoreDataMember] 
     public ICollection<SessionAnswer> SessionAnswers { get; set; }
 }

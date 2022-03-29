@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using UCS.DbProvider.Models;
 using UCS.WebApi.Helpers;
 using UCS.WebApi.Models.User;
 using UCS.WebApi.Services;
@@ -18,14 +19,17 @@ public class CatalogController : ControllerBase
     
     [Authorize]
     [HttpGet("GetUserCatalog")]
-    public IActionResult GetUserData()
+    public IActionResult GetUserCatalog()
     {
-        var user = HttpContext.Items["User"];
+        var user = HttpContext.Items["User"] as User;
 
         if (user == null)
         {
             return (BadRequest("Auth error!"));
         }
-        return Ok(user);
+
+        var catalog = _catalogService.GetUserDataSubjectsByUser(user);
+        
+        return Ok(catalog);
     }
 }
