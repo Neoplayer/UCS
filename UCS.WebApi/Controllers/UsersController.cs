@@ -17,22 +17,22 @@ namespace UCS.WebApi.Controllers
         }
 
 
-        [HttpPost("Register")]
-        public IActionResult Register(RegisterRequest model)
-        {
-            var response = _userService.RegisterUser(model);
-
-            if (response == false)
-                return BadRequest(new { message = "Registration error" });
-
-            var result = _userService.Authenticate(new AuthenticateRequest()
-            {
-                Username = model.Username,
-                Password = model.Password
-            });
-
-            return Ok(new { status = response, user = result });
-        }
+        // [HttpPost("Register")]
+        // public IActionResult Register(RegisterRequest model)
+        // {
+        //     var response = _userService.RegisterUser(model);
+        //
+        //     if (response == false)
+        //         return BadRequest(new { message = "Registration error" });
+        //
+        //     var result = _userService.Authenticate(new AuthenticateRequest()
+        //     {
+        //         Username = model.Username,
+        //         Password = model.Password
+        //     });
+        //
+        //     return Ok(new { status = response, user = result });
+        // }
 
         [HttpPost("Authenticate")]
         public IActionResult Authenticate(AuthenticateRequest model)
@@ -45,16 +45,8 @@ namespace UCS.WebApi.Controllers
             return Ok(response);
         }
 
-        //[Authorize]
-        //[HttpGet]
-        //public IActionResult GetAll()
-        //{
-        //    var users = _userService.GetAll();
-        //    return Ok(users);
-        //}
-
         [Authorize]
-        [HttpGet("GetUser   ")]
+        [HttpGet("GetUser")]
         public IActionResult GetUserData()
         {
             var user = HttpContext.Items["User"];

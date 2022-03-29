@@ -21,6 +21,7 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddSingleton<IUserService, UserService>();
+builder.Services.AddSingleton<ICatalogService, CatalogService>();
 
 var app = builder.Build();
 
