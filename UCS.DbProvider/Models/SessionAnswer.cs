@@ -1,5 +1,6 @@
+using System;
+
 namespace UCS.DbProvider.Models;
-using System.Collections.Generic;
 
 public class SessionAnswer
 {
@@ -11,7 +12,7 @@ public class SessionAnswer
     public Question Question { get; set; }
     public int? GradeId { get; set; }
     public Grade Grade { get; set; }
-    public int? ImageId { get; set; }
+    public Guid? ImageId { get; set; }
     public Image Image { get; set; }
 
     public string Comments { get; set; }

@@ -1,5 +1,7 @@
-namespace UCS.DbProvider.Models;
+using System.Text.Json.Serialization;
 using System.Collections.Generic;
+
+namespace UCS.DbProvider.Models;
 
 public class Group
 {
@@ -10,6 +12,8 @@ public class Group
 
     public string Name { get; set; }
 
-    public IEnumerable<Group> Groups { get; set; }
-    public IEnumerable<Subject> Subjects { get; set; }
+    [JsonIgnore]
+    public ICollection<User> Users { get; set; }
+    [JsonIgnore]
+    public ICollection<Subject> Subjects { get; set; }
 }

@@ -20,7 +20,7 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader());
 });
 
-builder.Services.AddSingleton<IUsersService, UsersService>();
+builder.Services.AddSingleton<IUserService, UserService>();
 
 var app = builder.Build();
 

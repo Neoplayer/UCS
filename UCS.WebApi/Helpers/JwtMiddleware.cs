@@ -1,10 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using System;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using UCS.WebApi.Services;
 
 namespace UCS.WebApi.Helpers

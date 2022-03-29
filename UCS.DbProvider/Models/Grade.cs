@@ -1,5 +1,7 @@
-namespace UCS.DbProvider.Models;
+using System.Text.Json.Serialization;
 using System.Collections.Generic;
+
+namespace UCS.DbProvider.Models;
 
 public class Grade
 {
@@ -8,6 +10,8 @@ public class Grade
     public int GradeNumber { get; set; }    // TODO rename
     public string Description { get; set; }
 
-    public IEnumerable<Question> Questions { get; set; }
-    public IEnumerable<SessionAnswer> SessionAnswers { get; set; }
+    [JsonIgnore]
+    public ICollection<Question> Questions { get; set; }
+    [JsonIgnore]
+    public ICollection<SessionAnswer> SessionAnswers { get; set; }
 }

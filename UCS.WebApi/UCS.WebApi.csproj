@@ -8,13 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.16.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.16.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Home.Core\Home.Core.csproj" />
     <ProjectReference Include="..\UCS.DbProvider\UCS.DbProvider.csproj" />
   </ItemGroup>
 

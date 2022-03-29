@@ -1,7 +1,5 @@
-﻿using ChatApp.Helpers;
-using ChatApp.Models.User;
-using ChatApp.Services;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using UCS.WebApi.Helpers;
 using UCS.WebApi.Models.User;
 using UCS.WebApi.Services;
 

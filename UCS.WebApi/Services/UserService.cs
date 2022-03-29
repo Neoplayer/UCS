@@ -1,7 +1,9 @@
-﻿using Microsoft.Extensions.Options;
+﻿using System.IdentityModel.Tokens.Jwt;
+using Microsoft.Extensions.Options;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using UCS.DbProvider;
 using UCS.DbProvider.Models;
 using UCS.WebApi.Helpers;
@@ -32,7 +34,7 @@ namespace UCS.WebApi.Services
         {
             using MainContext context = new MainContext();
 
-            var user = context.Users.Include(x => x.Messages).SingleOrDefault(x => x.Username == model.Username && x.Password == model.Password);
+            var user = context.Users.SingleOrDefault(x => x.Username == model.Username && x.Password == model.Password);
 
             // return null if user not found
             if (user == null) return null;
@@ -53,8 +55,7 @@ namespace UCS.WebApi.Services
                 Email = model.Email,
                 Password = model.Password,
                 Username = model.Username,
-                RegistrationDate = DateTime.Now,
-                Chats = new List<Chat>(context.Chats.Where(x => x.ChatType == ChatType.Global))
+                RegistrationDate = DateTime.Now
             };
 
 
@@ -68,7 +69,7 @@ namespace UCS.WebApi.Services
         {
             using MainContext context = new MainContext();
 
-            return context.Users.Include(x => x.Messages).FirstOrDefault(x => x.Id == id);
+            return context.Users.FirstOrDefault(x => x.Id == id);
         }
 
         // helper methods

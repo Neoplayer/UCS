@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace UCS.DbProvider.Models;
 
@@ -11,5 +12,6 @@ public class Chapter
     
     public string Name { get; set; }
 
-    public IEnumerable<Topic> Topics { get; set; }
+    [JsonIgnore]
+    public ICollection<Topic> Topics { get; set; }
 }

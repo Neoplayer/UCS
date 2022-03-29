@@ -1,5 +1,8 @@
-namespace UCS.DbProvider.Models;
+using System;
+using System.Text.Json.Serialization;
 using System.Collections.Generic;
+
+namespace UCS.DbProvider.Models;
 
 public class Question
 {
@@ -7,7 +10,7 @@ public class Question
 
     public int TopicId { get; set; }
     public Topic Topic { get; set; }
-    public int ImageId { get; set; }
+    public Guid? ImageId { get; set; }
     public Image Image { get; set; }
     public int QuestionTypeId { get; set; }
     public QuestionType QuestionType { get; set; }
@@ -17,6 +20,8 @@ public class Question
     public string Body { get; set; }
     public bool Active { get; set; }
 
-    public IEnumerable<Grade> Grades { get; set; }
-    public IEnumerable<SessionAnswer> SessionAnswers { get; set; }
+    [JsonIgnore]
+    public ICollection<Grade> Grades { get; set; }
+    [JsonIgnore]
+    public ICollection<SessionAnswer> SessionAnswers { get; set; }
 }

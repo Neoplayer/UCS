@@ -1,9 +1,12 @@
-namespace UCS.DbProvider.Models;
+using System;
+using System.Text.Json.Serialization;
 using System.Collections.Generic;
+
+namespace UCS.DbProvider.Models;
 
 public class Image
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     public string Path { get; set; }
     public string UploadDateTime { get; set; }
@@ -11,5 +14,6 @@ public class Image
     public int Height { get; set; }
     public int Size { get; set; }
 
-    public IEnumerable<Question> Questions { get; set; }
+    [JsonIgnore]
+    public ICollection<Question> Questions { get; set; }
 }
