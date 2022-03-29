@@ -7,6 +7,6 @@ services:
     image: webapitest
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ./UCS.WebApi/Dockerfile
     ports:
       - 80:80
