@@ -25,6 +25,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddSingleton<IUserService, UserService>();
 builder.Services.AddSingleton<ICatalogService, CatalogService>();
+builder.Services.AddSingleton<IImageService, ImageService>();
 
 IConfiguration config = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
