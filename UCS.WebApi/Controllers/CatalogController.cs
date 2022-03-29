@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using UCS.DbProvider.Models;
 using UCS.WebApi.Helpers;
 using UCS.WebApi.Models.User;
@@ -29,7 +30,13 @@ public class CatalogController : ControllerBase
         }
 
         var catalog = _catalogService.GetUserDataSubjectsByUser(user);
+
+        var jsonCatalog = JsonConvert.SerializeObject(catalog, new JsonSerializerSettings()
+        {
+            MaxDepth = 1,
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+        });
         
-        return Ok(catalog);
+        return Ok(jsonCatalog);
     }
 }

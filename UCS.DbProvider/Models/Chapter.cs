@@ -13,7 +13,7 @@ public class Chapter
     
     public string Name { get; set; }
 
-    [JsonIgnore]
-    [IgnoreDataMember] 
+    //[JsonIgnore]
+    //[IgnoreDataMember] 
     public ICollection<Topic> Topics { get; set; }
 }

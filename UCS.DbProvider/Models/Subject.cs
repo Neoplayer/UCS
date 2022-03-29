@@ -14,7 +14,7 @@ public class Subject
     [JsonIgnore]
     [IgnoreDataMember] 
     public ICollection<Group> Groups { get; set; }
-    [JsonIgnore]
-    [IgnoreDataMember] 
+    //[JsonIgnore]
+    //[IgnoreDataMember] 
     public ICollection<Chapter> Chapters { get; set; }
 }
