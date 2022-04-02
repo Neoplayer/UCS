@@ -15,7 +15,8 @@ public class TestSession
     public Topic Topic { get; set; }
 
     public DateTime StartDatetime { get; set; }
-    public DateTime FinishDatetime { get; set; }
+    public DateTime? FinishDatetime { get; set; }
+    public DateTime TimeLimitDatetime { get; set; }
 
     [JsonIgnore]
     [IgnoreDataMember] 

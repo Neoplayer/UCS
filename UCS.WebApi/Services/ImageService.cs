@@ -19,11 +19,12 @@ public class ImageService : IImageService
         {
             Id = Guid.NewGuid(), 
             ImageBytes = imageBytes,
-            UploadImageDateTime = DateTime.Now
+            UploadImageDateTime = DateTime.UtcNow,
+            Size = imageBytes.Length
         };
         
         context.Images.Add(image);
-        context.SaveChangesAsync();
+        context.SaveChanges();
 
         return image.Id;
     }

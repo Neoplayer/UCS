@@ -21,14 +21,14 @@ public class ImageController : ControllerBase
     {
         if (uploadedFile != null)
         {
-            using (var memoryStream = new MemoryStream())
-            {
-                await uploadedFile.CopyToAsync(memoryStream);
-                _imageService.UploadImage(memoryStream.ToArray());
-            }
+            await using var memoryStream = new MemoryStream();
+            await uploadedFile.CopyToAsync(memoryStream);
+            var res = _imageService.UploadImage(memoryStream.ToArray());
+
+            return Ok(res);
         }
             
-        return Ok();
+        return BadRequest();
     }
  
     [HttpPost("GetFileByGuid")]
