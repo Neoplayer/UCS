@@ -5,32 +5,35 @@ namespace UCS.WebApi.Services;
 
 public interface ITestSessionService
 {
-    TestSession? StartSession(User user, Topic topic);
+    TestSession? StartSession(User user, int topicId);
     bool FinishSession(User user);
     TestSession? GetActiveSession(User user);
 
-    bool SendAnswer();
-    bool RemoveAnswer();
+    bool SendAnswer(User user, int questionId, byte[] image);
+    bool RemoveAnswer(User user, int questionId);
 }
 
 public class TestSessionService : ITestSessionService
 {
-    public TestSession? StartSession(User user, Topic topic)
+    public TestSession? StartSession(User user, int topicId)
     {
         if (GetActiveSession(user) != null)
         {
             return null;
         }
+        
+        using MainContext context = new MainContext();
 
+        var topic = context.Topics.FirstOrDefault(x => x.Id == topicId);
+        
         TestSession session = new TestSession()
         {
-            TopicId = topic.Id,
+            TopicId = topicId,
             StartDatetime = DateTime.UtcNow,
-            TimeLimitDatetime = DateTime.UtcNow + topic.TimeLimit,
+            TimeLimitDatetime = DateTime.UtcNow + (topic?.TimeLimit?? TimeSpan.Zero),
             UserId = user.Id
         };
 
-        using MainContext context = new MainContext();
 
         context.TestSessions.Add(session);
         context.SaveChanges();
@@ -68,13 +71,65 @@ public class TestSessionService : ITestSessionService
         return session;
     }
 
-    public bool SendAnswer()
+    public bool SendAnswer(User user, int questionId, byte[] image)
     {
-        throw new NotImplementedException();
+        using MainContext context = new MainContext();
+        
+        var session = GetActiveSession(user);
+
+        if (session == null)
+        {
+            return false;
+        }
+
+        var answerInDb =
+            context.SessionAnswers.FirstOrDefault(x => x.TestSessionId == session.Id && x.QuestionId == questionId);
+
+        if (answerInDb != null)
+        {
+            context.SessionAnswers.Remove(answerInDb);
+        }
+
+        var imageDb = new Image()
+        {
+            Id = Guid.NewGuid(),
+            ImageBytes = image,
+            Size = image.Length,
+            UploadImageDateTime = DateTime.UtcNow
+        };
+
+        var sessionAnswer = new SessionAnswer()
+        {
+            QuestionId = questionId,
+            Image = imageDb, // TODO test
+            GradeId = questionId,
+            TestSessionId = session.Id
+        };
+
+        context.SessionAnswers.Add(sessionAnswer);
+        context.SaveChanges();
+
+        return true;
     }
 
-    public bool RemoveAnswer()
+    public bool RemoveAnswer(User user, int questionId)
     {
-        throw new NotImplementedException();
+        using MainContext context = new MainContext();
+        
+        var session = GetActiveSession(user);
+
+        if (session == null)
+        {
+            return false;
+        }
+        
+        var answer = context.SessionAnswers.FirstOrDefault(x => x.TestSessionId == session.Id && x.QuestionId == questionId);
+
+        if (answer != null)
+        {
+            context.SessionAnswers.Remove(answer);
+        }
+        
+        return true;
     }
 }
