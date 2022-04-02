@@ -58,9 +58,9 @@ public class TestingController : ControllerBase
             return (BadRequest("Auth error!"));
         }
         
-        _testSessionService.GetActiveSession(user);
+        var session = _testSessionService.GetActiveSession(user);
         
-        return Ok();
+        return Ok(session);
     }
     [Authorize]
     [HttpPost("SendAnswer")]
@@ -73,9 +73,9 @@ public class TestingController : ControllerBase
             return (BadRequest("Auth error!"));
         }
         
-        _testSessionService.SendAnswer(user, data.QuestionId, data.Image);
+        var res = _testSessionService.SendAnswer(user, data.QuestionId, data.Image);
         
-        return Ok();
+        return Ok(new { success = res });
     }
     [Authorize]
     [HttpGet("RemoveAnswer")]
@@ -88,8 +88,8 @@ public class TestingController : ControllerBase
             return (BadRequest("Auth error!"));
         }
 
-        _testSessionService.RemoveAnswer(user, questionId);
+        var res = _testSessionService.RemoveAnswer(user, questionId);
         
-        return Ok();
+        return Ok(new { success = res });
     }
 }
