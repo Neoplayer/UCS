@@ -21,4 +21,7 @@ public class Topic
     [JsonIgnore]
     [IgnoreDataMember] 
     public ICollection<TestSession> Sessions { get; set; }
+    [JsonIgnore]
+    [IgnoreDataMember] 
+    public ICollection<TopicRule> TopicRules { get; set; }
 }

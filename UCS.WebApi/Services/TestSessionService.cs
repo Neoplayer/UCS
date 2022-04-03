@@ -25,20 +25,28 @@ public class TestSessionService : ITestSessionService
 
         using MainContext context = new MainContext();
 
-        var topic = context.Topics.FirstOrDefault(x => x.Id == topicId);
+        var topic = context.Topics.Include(x => x.TopicRules).FirstOrDefault(x => x.Id == topicId);
+
+        var questions = CombineTest(topic);
 
         TestSession session = new TestSession()
         {
             TopicId = topicId,
             StartDatetime = DateTime.UtcNow,
             TimeLimitDatetime = DateTime.UtcNow + (topic?.TimeLimit ?? TimeSpan.Zero),
-            UserId = user.Id
+            UserId = user.Id,
+            Answers = questions.Select(x => new SessionAnswer()
+            {
+                QuestionId = x.Id
+            }).ToList()
         };
 
 
         context.TestSessions.Add(session);
         context.SaveChanges();
 
+        session.Answers = context.SessionAnswers.Include(x => x.Question).Where(x => x.TestSessionId == session.Id).ToList();
+        
         return session;
     }
 
@@ -65,10 +73,43 @@ public class TestSessionService : ITestSessionService
         using MainContext context = new MainContext();
 
         var session = context.TestSessions
+            .Include(x => x.Answers)
+            .ThenInclude(x => x.Question)
             .Where(x => x.UserId == user.Id)
             .FirstOrDefault(x => (x.TimeLimitDatetime > DateTime.UtcNow) && ((x.FinishDatetime ?? x.TimeLimitDatetime) > DateTime.UtcNow));
 
         return session;
+    }
+    
+    public ICollection<Question>? CombineTest(Topic topic)
+    {
+        using MainContext context = new MainContext();
+
+        var questionsList = new List<Question>();
+        
+        foreach (var rule in topic.TopicRules)
+        {
+            Random random = new Random(DateTime.Now.Ticks.GetHashCode());
+
+            var questions = context.Questions
+                .Where(x => x.QuestionThemeId == rule.QuestionThemeId && x.QuestionTypeId == rule.QuestionTypeId)
+                .ToArray();
+
+            for (int i = 0; i < rule.QuestionsCount; i++)
+            {
+                var number = random.Next(0, questions.Count());
+
+                while (questionsList.Any(x => x.Id == questions[number].Id))
+                {
+                    number = random.Next(0, questions.Count());
+                }
+                
+                questionsList.Add(questions[number]);
+            }
+            
+        }
+        
+        return questionsList;
     }
 
     public bool SendAnswer(User user, int questionId, byte[] image)
@@ -85,9 +126,9 @@ public class TestSessionService : ITestSessionService
         var answerInDb =
             context.SessionAnswers.FirstOrDefault(x => x.TestSessionId == session.Id && x.QuestionId == questionId);
 
-        if (answerInDb != null)
+        if (answerInDb == null)
         {
-            context.SessionAnswers.Remove(answerInDb);
+            return false;
         }
 
         var imageDb = new Image()
@@ -98,15 +139,9 @@ public class TestSessionService : ITestSessionService
             UploadDateTime = DateTime.UtcNow
         };
 
-        var sessionAnswer = new SessionAnswer()
-        {
-            QuestionId = questionId,
-            Image = imageDb,
-            GradeId = questionId,
-            TestSessionId = session.Id
-        };
+        answerInDb.Image = imageDb;
 
-        context.SessionAnswers.Add(sessionAnswer);
+        context.SessionAnswers.Update(answerInDb);
         context.SaveChanges();
 
         return true;
@@ -127,7 +162,9 @@ public class TestSessionService : ITestSessionService
 
         if (answer != null)
         {
-            context.SessionAnswers.Remove(answer);
+            answer.ImageId = null;
+            
+            context.SessionAnswers.Update(answer);
             context.Images.Remove(answer.Image);
 
             context.SaveChanges();

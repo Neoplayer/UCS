@@ -36,7 +36,7 @@ public class TestingController : ControllerBase
             return Ok(new { success = false, message = "Session already started" });
         }
 
-        return Ok(new { success = false, session });
+        return Ok(new { success = false, session, questions = session.Answers.Select(x => x.Question).ToList() });
     }
 
     [Authorize]
@@ -68,7 +68,7 @@ public class TestingController : ControllerBase
 
         var session = _testSessionService.GetActiveSession(user);
 
-        return Ok(new { success = true, session });
+        return Ok(new { success = false, session, questions = session.Answers.Select(x => x.Question).ToList() });
     }
 
     [Authorize]
