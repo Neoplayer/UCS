@@ -95,7 +95,7 @@ public class TestSessionService : ITestSessionService
             Id = Guid.NewGuid(),
             ImageBytes = image,
             Size = image.Length,
-            UploadImageDateTime = DateTime.UtcNow
+            UploadDateTime = DateTime.UtcNow
         };
 
         var sessionAnswer = new SessionAnswer()
@@ -128,6 +128,7 @@ public class TestSessionService : ITestSessionService
         if (answer != null)
         {
             context.SessionAnswers.Remove(answer);
+            context.Images.Remove(answer.Image);
 
             context.SaveChanges();
         }

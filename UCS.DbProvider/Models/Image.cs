@@ -9,9 +9,9 @@ public class Image
     public Guid Id { get; set; }
 
     public string Path { get; set; }
-    public DateTime UploadImageDateTime { get; set; }
     public int Width { get; set; }
     public int Height { get; set; }
+    public DateTime UploadDateTime { get; set; }
     public int Size { get; set; }
     public byte[] ImageBytes { get; set; }
 

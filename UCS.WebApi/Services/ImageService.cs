@@ -19,7 +19,7 @@ public class ImageService : IImageService
         {
             Id = Guid.NewGuid(), 
             ImageBytes = imageBytes,
-            UploadImageDateTime = DateTime.UtcNow,
+            UploadDateTime = DateTime.UtcNow,
             Size = imageBytes.Length
         };
         

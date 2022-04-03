@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using UCS.DbProvider;
@@ -11,9 +12,10 @@ using UCS.DbProvider;
 namespace UCS.DbProvider.Migrations
 {
     [DbContext(typeof(MainContext))]
-    partial class MainContextModelSnapshot : ModelSnapshot
+    [Migration("20220403164001_ImageFix2")]
+    partial class ImageFix2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -162,7 +164,10 @@ namespace UCS.DbProvider.Migrations
                     b.Property<int>("Size")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("UploadDateTime")
+                    b.Property<DateTime>("UploadDatetime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("UploadImageDateTime")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("Width")
