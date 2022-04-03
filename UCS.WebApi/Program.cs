@@ -1,7 +1,7 @@
-using UCS.WebApi.Helpers;
-using UCS.WebApi.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.OpenApi.Models;
+using UCS.WebApi.Helpers;
+using UCS.WebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 builder.Services.AddCors(options =>
 {
@@ -26,6 +26,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddSingleton<IUserService, UserService>();
 builder.Services.AddSingleton<ICatalogService, CatalogService>();
 builder.Services.AddSingleton<IImageService, ImageService>();
+builder.Services.AddSingleton<ITestSessionService, TestSessionService>();
 
 IConfiguration config = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
@@ -48,7 +49,7 @@ builder.Services.AddSwaggerGen(c =>
         Name = "Authorization",
         Type = SecuritySchemeType.ApiKey
     });
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement 
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
             new OpenApiSecurityScheme

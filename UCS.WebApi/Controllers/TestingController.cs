@@ -11,12 +11,12 @@ namespace UCS.WebApi.Controllers;
 public class TestingController : ControllerBase
 {
     ITestSessionService _testSessionService;
-    
+
     public TestingController(ITestSessionService testSessionService)
     {
         _testSessionService = testSessionService;
     }
-    
+
     [Authorize]
     [HttpGet("StartSession")]
     public IActionResult StartSession(int topicId)
@@ -28,10 +28,17 @@ public class TestingController : ControllerBase
             return (BadRequest("Auth error!"));
         }
 
-        _testSessionService.StartSession(user, topicId);
-        
-        return Ok();
+        var session = _testSessionService.StartSession(user, topicId);
+
+        if (session == null)
+        {
+
+            return Ok(new { success = false, message = "Session already started" });
+        }
+
+        return Ok(new { success = false, session });
     }
+
     [Authorize]
     [HttpGet("FinishSession")]
     public IActionResult FinishSession()
@@ -42,11 +49,12 @@ public class TestingController : ControllerBase
         {
             return (BadRequest("Auth error!"));
         }
-        
+
         _testSessionService.FinishSession(user);
-        
-        return Ok();
+
+        return Ok(new { success = true });
     }
+
     [Authorize]
     [HttpGet("GetActiveSession")]
     public IActionResult GetActiveSession()
@@ -57,14 +65,15 @@ public class TestingController : ControllerBase
         {
             return (BadRequest("Auth error!"));
         }
-        
+
         var session = _testSessionService.GetActiveSession(user);
-        
-        return Ok(session);
+
+        return Ok(new { success = true, session });
     }
+
     [Authorize]
     [HttpPost("SendAnswer")]
-    public IActionResult SendAnswer(AnswerData data)
+    public IActionResult SendAnswer(int questionId, IFormFile file)
     {
         var user = HttpContext.Items["User"] as User;
 
@@ -72,11 +81,12 @@ public class TestingController : ControllerBase
         {
             return (BadRequest("Auth error!"));
         }
-        
-        var res = _testSessionService.SendAnswer(user, data.QuestionId, data.Image);
-        
+
+        var res = _testSessionService.SendAnswer(user, questionId, file.GetBytes().Result);
+
         return Ok(new { success = res });
     }
+
     [Authorize]
     [HttpGet("RemoveAnswer")]
     public IActionResult RemoveAnswer(int questionId)
@@ -89,7 +99,7 @@ public class TestingController : ControllerBase
         }
 
         var res = _testSessionService.RemoveAnswer(user, questionId);
-        
+
         return Ok(new { success = res });
     }
 }

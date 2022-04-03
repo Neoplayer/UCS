@@ -1,4 +1,5 @@
-﻿using UCS.DbProvider;
+﻿using Microsoft.EntityFrameworkCore;
+using UCS.DbProvider;
 using UCS.DbProvider.Models;
 
 namespace UCS.WebApi.Services;
@@ -21,16 +22,16 @@ public class TestSessionService : ITestSessionService
         {
             return null;
         }
-        
+
         using MainContext context = new MainContext();
 
         var topic = context.Topics.FirstOrDefault(x => x.Id == topicId);
-        
+
         TestSession session = new TestSession()
         {
             TopicId = topicId,
             StartDatetime = DateTime.UtcNow,
-            TimeLimitDatetime = DateTime.UtcNow + (topic?.TimeLimit?? TimeSpan.Zero),
+            TimeLimitDatetime = DateTime.UtcNow + (topic?.TimeLimit ?? TimeSpan.Zero),
             UserId = user.Id
         };
 
@@ -49,9 +50,9 @@ public class TestSessionService : ITestSessionService
         {
             return false;
         }
-        
+
         session.FinishDatetime = DateTime.UtcNow;
-        
+
         using MainContext context = new MainContext();
         context.TestSessions.Update(session);
         context.SaveChanges();
@@ -65,8 +66,7 @@ public class TestSessionService : ITestSessionService
 
         var session = context.TestSessions
             .Where(x => x.UserId == user.Id)
-            .Where(x => x.TimeLimitDatetime > DateTime.UtcNow)
-            .FirstOrDefault(x => x.FinishDatetime != null && x.FinishDatetime > DateTime.UtcNow);
+            .FirstOrDefault(x => (x.TimeLimitDatetime > DateTime.UtcNow) && ((x.FinishDatetime ?? x.TimeLimitDatetime) > DateTime.UtcNow));
 
         return session;
     }
@@ -74,7 +74,7 @@ public class TestSessionService : ITestSessionService
     public bool SendAnswer(User user, int questionId, byte[] image)
     {
         using MainContext context = new MainContext();
-        
+
         var session = GetActiveSession(user);
 
         if (session == null)
@@ -101,7 +101,7 @@ public class TestSessionService : ITestSessionService
         var sessionAnswer = new SessionAnswer()
         {
             QuestionId = questionId,
-            Image = imageDb, // TODO test
+            Image = imageDb,
             GradeId = questionId,
             TestSessionId = session.Id
         };
@@ -115,21 +115,23 @@ public class TestSessionService : ITestSessionService
     public bool RemoveAnswer(User user, int questionId)
     {
         using MainContext context = new MainContext();
-        
+
         var session = GetActiveSession(user);
 
         if (session == null)
         {
             return false;
         }
-        
-        var answer = context.SessionAnswers.FirstOrDefault(x => x.TestSessionId == session.Id && x.QuestionId == questionId);
+
+        var answer = context.SessionAnswers.Include(x => x.Image).FirstOrDefault(x => x.TestSessionId == session.Id && x.QuestionId == questionId);
 
         if (answer != null)
         {
             context.SessionAnswers.Remove(answer);
+
+            context.SaveChanges();
         }
-        
+
         return true;
     }
 }

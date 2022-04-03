@@ -363,3 +363,10 @@ MigrationBackup/
 FodyWeavers.xsd
 .vscode/launch.json
 .vscode/tasks.json
+.idea/.idea.ChatApp/.idea/.gitignore
+.idea/.idea.ChatApp/.idea/indexLayout.xml
+.idea/.idea.ChatApp/.idea/vcs.xml
+.idea/.idea.UCS/.idea/.gitignore
+.idea/.idea.UCS/.idea/.name
+.idea/.idea.UCS/.idea/indexLayout.xml
+.idea/.idea.UCS/.idea/vcs.xml
