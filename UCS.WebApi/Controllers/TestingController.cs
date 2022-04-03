@@ -102,17 +102,4 @@ public class TestingController : ControllerBase
 
         return Ok(new { success = res });
     }
-    
-    [HttpGet("GetTopicInfo")]
-    public IActionResult GetTopicInfo(int topicId)
-    {
-        var topicInfo = _testSessionService.GetTopic(topicId);
-
-        if (topicInfo == null)
-        {
-            return Ok(new {success = false});
-        }
-        
-        return Ok(new { success = true, topicInfo });
-    }
 }

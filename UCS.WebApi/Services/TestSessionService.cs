@@ -13,9 +13,6 @@ public interface ITestSessionService
 
     bool SendAnswer(User user, int questionId, byte[] image);
     bool RemoveAnswer(User user, int questionId);
-    
-    
-    GetTopicResponse? GetTopic(int topicId);
 }
 
 public class TestSessionService : ITestSessionService
@@ -175,31 +172,5 @@ public class TestSessionService : ITestSessionService
         }
 
         return true;
-    }
-
-
-    public GetTopicResponse? GetTopic(int topicId)
-    {
-        using MainContext context = new MainContext();
-
-        var topic = context.Topics
-                            .Include(x => x.TopicRules)
-                            .Include(x => x.Chapter)
-                            .ThenInclude(x => x.Subject)
-                            .FirstOrDefault(x => x.Id == topicId);
-
-        if (topic == null)
-        {
-            return null;
-        }
-
-        return new GetTopicResponse()
-        {
-            TopicName = topic.Name,
-            CharapterName = topic.Chapter.Name,
-            SubjectName = topic.Chapter.Subject.Name,
-            TimeLimit = topic.TimeLimit,
-            QuestionsCount = topic.TopicRules.Sum(x => x.QuestionsCount)
-        };
     }
 }

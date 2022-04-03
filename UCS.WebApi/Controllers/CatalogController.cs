@@ -39,4 +39,17 @@ public class CatalogController : ControllerBase
         
         return Ok(jsonCatalog);
     }
+    
+    [HttpGet("GetTopicInfo")]
+    public IActionResult GetTopicInfo(int topicId)
+    {
+        var topicInfo = _catalogService.GetTopic(topicId);
+
+        if (topicInfo == null)
+        {
+            return Ok(new {success = false});
+        }
+        
+        return Ok(new { success = true, topicInfo });
+    }
 }
