@@ -68,7 +68,7 @@ public class TestingController : ControllerBase
 
         var session = _testSessionService.GetActiveSession(user);
 
-        return Ok(new { success = false, session, questions = session.Answers.Select(x => x.Question).ToList() });
+        return Ok(new { success = true, session, questions = session?.Answers?.Select(x => x.Question)?.ToList() });
     }
 
     [Authorize]
