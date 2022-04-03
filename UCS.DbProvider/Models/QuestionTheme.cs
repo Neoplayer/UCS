@@ -9,8 +9,8 @@ public class QuestionTheme
     public int Id { get; set; }
 
     public string Name { get; set; }
-    
+
     [JsonIgnore]
-    [IgnoreDataMember] 
-    public ICollection<TopicRule> TopicRules { get; set; }
+    [IgnoreDataMember]
+    public virtual ICollection<TopicRule> TopicRules { get; set; }
 }

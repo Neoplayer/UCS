@@ -7,13 +7,13 @@ namespace UCS.DbProvider.Models;
 public class Chapter
 {
     public int Id { get; set; }
-    
+
     public int SubjectId { get; set; }
     public Subject Subject { get; set; }
-    
+
     public string Name { get; set; }
 
     //[JsonIgnore]
     //[IgnoreDataMember] 
-    public ICollection<Topic> Topics { get; set; }
+    public virtual ICollection<Topic> Topics { get; set; }
 }

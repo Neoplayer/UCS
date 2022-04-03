@@ -1,6 +1,6 @@
 using System;
-using System.Text.Json.Serialization;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace UCS.DbProvider.Models;
 
@@ -16,5 +16,5 @@ public class Image
     public byte[] ImageBytes { get; set; }
 
     [JsonIgnore]
-    public ICollection<Question> Questions { get; set; }
+    public virtual ICollection<Question> Questions { get; set; }
 }

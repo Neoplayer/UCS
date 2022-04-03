@@ -1,6 +1,6 @@
-using System.Text.Json.Serialization;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace UCS.DbProvider.Models;
 
@@ -11,6 +11,6 @@ public class Faculty
     public string Name { get; set; }
 
     [JsonIgnore]
-    [IgnoreDataMember] 
-    public ICollection<Group> Groups { get; set; }
+    [IgnoreDataMember]
+    public virtual ICollection<Group> Groups { get; set; }
 }

@@ -1,7 +1,7 @@
 using System;
-using System.Text.Json.Serialization;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace UCS.DbProvider.Models;
 
@@ -19,6 +19,6 @@ public class TestSession
     public DateTime TimeLimitDatetime { get; set; }
 
     [JsonIgnore]
-    [IgnoreDataMember] 
-    public ICollection<SessionAnswer> Answers { get; set; }
+    [IgnoreDataMember]
+    public virtual ICollection<SessionAnswer> Answers { get; set; }
 }

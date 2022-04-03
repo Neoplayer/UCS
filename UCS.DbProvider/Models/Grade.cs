@@ -1,6 +1,6 @@
-using System.Text.Json.Serialization;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace UCS.DbProvider.Models;
 
@@ -12,9 +12,9 @@ public class Grade
     public string Description { get; set; }
 
     [JsonIgnore]
-    [IgnoreDataMember] 
-    public ICollection<Question> Questions { get; set; }
+    [IgnoreDataMember]
+    public virtual ICollection<Question> Questions { get; set; }
     [JsonIgnore]
-    [IgnoreDataMember] 
-    public ICollection<SessionAnswer> SessionAnswers { get; set; }
+    [IgnoreDataMember]
+    public virtual ICollection<SessionAnswer> SessionAnswers { get; set; }
 }

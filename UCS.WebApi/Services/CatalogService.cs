@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using UCS.DbProvider;
 using UCS.DbProvider.Models;
 using UCS.WebApi.Dto;
@@ -18,13 +19,13 @@ public class CatalogService : ICatalogService
         using MainContext context = new MainContext();
 
         var dbIUser = context.Users
-            .Include(x => x.Group)
+            .Include(x => x.Groups)
             .ThenInclude(x => x.Subjects)
             .ThenInclude(x => x.Chapters)
             .ThenInclude(x => x.Topics)
             .FirstOrDefault(x => x.Id == user.Id);
 
-        return dbIUser?.Group.Subjects;
+        return dbIUser?.Groups.SelectMany(x => x.Subjects).ToArray();
     }
 
     public TopicResponse? GetTopic(int topicId)

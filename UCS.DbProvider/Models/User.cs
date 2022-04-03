@@ -12,9 +12,7 @@ namespace UCS.DbProvider.Models
 
         public Guid ImageId { get; set; }
         public Image Image { get; set; }
-        public int GroupId { get; set; }
-        public Group Group { get; set; }
-        
+
         public string Email { get; set; }
         public string Username { get; set; }
         [JsonIgnore]
@@ -24,9 +22,12 @@ namespace UCS.DbProvider.Models
         public string MiddleName { get; set; }
         public int Ages { get; set; }
         public DateTime RegistrationDate { get; set; }
-        
+
         [JsonIgnore]
-        [IgnoreDataMember] 
+        [IgnoreDataMember]
         public virtual ICollection<Role> Roles { get; set; }
+        [JsonIgnore]
+        [IgnoreDataMember]
+        public virtual ICollection<Group> Groups { get; set; }
     }
 }

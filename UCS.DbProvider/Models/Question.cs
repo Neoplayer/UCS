@@ -1,7 +1,7 @@
 using System;
-using System.Text.Json.Serialization;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace UCS.DbProvider.Models;
 
@@ -22,9 +22,9 @@ public class Question
     public bool Active { get; set; }
 
     [JsonIgnore]
-    [IgnoreDataMember] 
-    public ICollection<Grade> Grades { get; set; }
+    [IgnoreDataMember]
+    public virtual ICollection<Grade> Grades { get; set; }
     [JsonIgnore]
-    [IgnoreDataMember] 
-    public ICollection<SessionAnswer> SessionAnswers { get; set; }
+    [IgnoreDataMember]
+    public virtual ICollection<SessionAnswer> SessionAnswers { get; set; }
 }
