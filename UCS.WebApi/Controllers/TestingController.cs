@@ -36,7 +36,7 @@ public class TestingController : ControllerBase
             return Ok(new { success = false, message = "Session already started" });
         }
 
-        return Ok(new { success = false, session, questions = session.Answers.Select(x => x.Question).ToList() });
+        return Ok(new { success = true, session, questions = session.Answers.ToList() });
     }
 
     [Authorize]
@@ -68,7 +68,7 @@ public class TestingController : ControllerBase
 
         var session = _testSessionService.GetActiveSession(user);
 
-        return Ok(new { success = true, session, questions = session?.Answers?.Select(x => x.Question)?.ToList() });
+        return Ok(new { success = true, session, questions = session?.Answers?.ToList() });
     }
 
     [Authorize]
@@ -101,5 +101,18 @@ public class TestingController : ControllerBase
         var res = _testSessionService.RemoveAnswer(user, questionId);
 
         return Ok(new { success = res });
+    }
+    
+    [HttpGet("GetTopicInfo")]
+    public IActionResult GetTopicInfo(int topicId)
+    {
+        var topicInfo = _testSessionService.GetTopic(topicId);
+
+        if (topicInfo == null)
+        {
+            return Ok(new {success = false});
+        }
+        
+        return Ok(new { success = true, topicInfo });
     }
 }
