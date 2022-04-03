@@ -47,7 +47,7 @@ public class TestSessionService : ITestSessionService
         context.SaveChanges();
 
         session.Answers = context.SessionAnswers.Include(x => x.Question).Where(x => x.TestSessionId == session.Id).ToList();
-        
+
         return session;
     }
 
@@ -81,13 +81,13 @@ public class TestSessionService : ITestSessionService
 
         return session;
     }
-    
+
     public ICollection<Question>? CombineTest(Topic topic)
     {
         using MainContext context = new MainContext();
 
         var questionsList = new List<Question>();
-        
+
         foreach (var rule in topic.TopicRules)
         {
             Random random = new Random(DateTime.Now.Ticks.GetHashCode());
@@ -104,12 +104,12 @@ public class TestSessionService : ITestSessionService
                 {
                     number = random.Next(0, questions.Count());
                 }
-                
+
                 questionsList.Add(questions[number]);
             }
-            
+
         }
-        
+
         return questionsList;
     }
 
@@ -134,7 +134,6 @@ public class TestSessionService : ITestSessionService
 
         var imageDb = new Image()
         {
-            Id = Guid.NewGuid(),
             ImageBytes = image,
             Size = image.Length,
             UploadDateTime = DateTime.UtcNow
@@ -164,7 +163,7 @@ public class TestSessionService : ITestSessionService
         if (answer != null)
         {
             answer.ImageId = null;
-            
+
             context.SessionAnswers.Update(answer);
             context.Images.Remove(answer.Image);
 

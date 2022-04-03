@@ -1,6 +1,6 @@
-﻿using UCS.DbProvider.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using UCS.DbProvider;
+using UCS.DbProvider.Models;
 using UCS.WebApi.Dto;
 
 namespace UCS.WebApi.Services;
@@ -8,7 +8,7 @@ namespace UCS.WebApi.Services;
 public interface ICatalogService
 {
     ICollection<Subject>? GetUserDataSubjectsByUser(User user);
-    GetTopicResponse? GetTopic(int topicId);
+    TopicResponse? GetTopic(int topicId);
 }
 
 public class CatalogService : ICatalogService
@@ -26,8 +26,8 @@ public class CatalogService : ICatalogService
 
         return dbIUser?.Group.Subjects;
     }
-    
-    public GetTopicResponse? GetTopic(int topicId)
+
+    public TopicResponse? GetTopic(int topicId)
     {
         using MainContext context = new MainContext();
 
@@ -42,7 +42,7 @@ public class CatalogService : ICatalogService
             return null;
         }
 
-        return new GetTopicResponse()
+        return new TopicResponse()
         {
             TopicName = topic.Name,
             CharapterName = topic.Chapter.Name,

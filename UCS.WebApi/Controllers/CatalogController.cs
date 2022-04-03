@@ -17,7 +17,7 @@ public class CatalogController : ControllerBase
     {
         _catalogService = catalogService;
     }
-    
+
     [Authorize]
     [HttpGet("GetUserCatalog")]
     public IActionResult GetUserCatalog()
@@ -36,10 +36,10 @@ public class CatalogController : ControllerBase
             MaxDepth = 1,
             ReferenceLoopHandling = ReferenceLoopHandling.Ignore
         });
-        
+
         return Ok(jsonCatalog);
     }
-    
+
     [HttpGet("GetTopicInfo")]
     public IActionResult GetTopicInfo(int topicId)
     {
@@ -47,9 +47,9 @@ public class CatalogController : ControllerBase
 
         if (topicInfo == null)
         {
-            return Ok(new {success = false});
+            return Ok(new { Success = false });
         }
-        
-        return Ok(new { success = true, topicInfo });
+
+        return Ok(new { Success = true, topicInfo });
     }
 }

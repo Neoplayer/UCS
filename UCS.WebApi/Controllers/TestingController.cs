@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using UCS.DbProvider.Models;
 using UCS.WebApi.Dto;
+using UCS.WebApi.Dto.Session;
 using UCS.WebApi.Helpers;
 using UCS.WebApi.Services;
 
@@ -10,10 +11,12 @@ namespace UCS.WebApi.Controllers;
 [Route("[controller]")]
 public class TestingController : ControllerBase
 {
+    ICatalogService _catalogService;
     ITestSessionService _testSessionService;
 
-    public TestingController(ITestSessionService testSessionService)
+    public TestingController(ITestSessionService testSessionService, ICatalogService catalogService)
     {
+        _catalogService = catalogService;
         _testSessionService = testSessionService;
     }
 
@@ -32,11 +35,23 @@ public class TestingController : ControllerBase
 
         if (session == null)
         {
-
-            return Ok(new { success = false, message = "Session already started" });
+            return Ok(new { Success = false, Message = "Session already started" });
         }
 
-        return Ok(new { success = true, session, questions = session.Answers.ToList() });
+        return Ok(new SessionResponse()
+        {
+            Success = true,
+            StartDateTime = session.StartDatetime,
+            TimeLimit = session.TimeLimitDatetime,
+            TopicInfo = _catalogService.GetTopic(session.TopicId),
+            Questions = session.Answers.Select(x => new QuestionResponse()
+            {
+                QuestionId = x.QuestionId,
+                QuestionImageId = x.Question.ImageId,
+                AnswerImageId = x.ImageId,
+                Body = x.Question.Body
+            }).ToList()
+        });
     }
 
     [Authorize]
@@ -52,7 +67,7 @@ public class TestingController : ControllerBase
 
         _testSessionService.FinishSession(user);
 
-        return Ok(new { success = true });
+        return Ok(new { Success = true });
     }
 
     [Authorize]
@@ -68,7 +83,25 @@ public class TestingController : ControllerBase
 
         var session = _testSessionService.GetActiveSession(user);
 
-        return Ok(new { success = true, session, questions = session?.Answers?.ToList() });
+        if (session == null)
+        {
+            return Ok(new { Success = false, Message = "No active sessions" });
+        }
+
+        return Ok(new SessionResponse()
+        {
+            Success = true,
+            StartDateTime = session.StartDatetime,
+            TimeLimit = session.TimeLimitDatetime,
+            TopicInfo = _catalogService.GetTopic(session.TopicId),
+            Questions = session.Answers.Select(x => new QuestionResponse()
+            {
+                QuestionId = x.QuestionId,
+                QuestionImageId = x.Question.ImageId,
+                AnswerImageId = x.ImageId,
+                Body = x.Question.Body
+            }).ToList()
+        });
     }
 
     [Authorize]
@@ -84,7 +117,7 @@ public class TestingController : ControllerBase
 
         var res = _testSessionService.SendAnswer(user, questionId, file.GetBytes().Result);
 
-        return Ok(new { success = res });
+        return Ok(new { Success = res });
     }
 
     [Authorize]
@@ -100,6 +133,6 @@ public class TestingController : ControllerBase
 
         var res = _testSessionService.RemoveAnswer(user, questionId);
 
-        return Ok(new { success = res });
+        return Ok(new { Success = res });
     }
 }

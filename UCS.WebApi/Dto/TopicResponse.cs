@@ -1,6 +1,6 @@
 ﻿namespace UCS.WebApi.Dto;
 
-public class GetTopicResponse
+public class TopicResponse : ResponseBase
 {
     public string TopicName { get; set; }
     public string CharapterName { get; set; }
