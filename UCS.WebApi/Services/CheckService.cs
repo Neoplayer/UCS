@@ -10,6 +10,7 @@ namespace UCS.WebApi.Services;
 public interface ICheckService
 {
     ICollection<Group> GetGroups(User user);
+    ICollection<TestSession> GetTestsToCheck(int userId);
 }
 public class CheckService : ICheckService
 {
@@ -24,5 +25,27 @@ public class CheckService : ICheckService
             .Where(x => x.Users.Any(u => u.Roles.Any(r => r.Id == (int) ERole.Teacher) && u.Id == user.Id));
 
         return groups.ToList();
+    }
+    
+    public ICollection<TestSession> GetTestsToCheck(int userId)
+    {
+        using MainContext context = new MainContext();
+
+        var groupsIds = context.Users
+                        .Include(x => x.Groups)
+                        .FirstOrDefault(x => x.Id == userId)
+                        ?.Groups
+                        .Select(x => x.Id);
+        
+        var sessions = context.TestSessions
+            .Include(x => x.Answers)
+            .ThenInclude(x => x.Question)
+            .Include(x => x.User)
+            .ThenInclude(x => x.Groups)
+            .Where(x => x.User.Groups.Count == 1)
+            .Where(x => (groupsIds ?? Array.Empty<int>()).Contains(x.User.Groups.FirstOrDefault()!.Id))
+            .Where(x => x.Answers.Any(a => a.GradeId == null)).ToList();
+
+        return sessions;
     }
 }

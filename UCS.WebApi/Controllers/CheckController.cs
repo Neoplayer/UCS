@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UCS.DbProvider.Models;
 using UCS.WebApi.Dto.Check;
+using UCS.WebApi.Dto.Session;
 using UCS.WebApi.Helpers;
 using UCS.WebApi.Models;
 using UCS.WebApi.Services;
@@ -12,9 +13,11 @@ namespace UCS.WebApi.Controllers;
 public class CheckController : ControllerBase
 {
     ICheckService _checkService;
+    ICatalogService _catalogService;
     
-    public CheckController(ICheckService checkService)
+    public CheckController(ICheckService checkService, ICatalogService catalogService)
     {
+        _catalogService = catalogService;
         _checkService = checkService;
     }
     
@@ -64,5 +67,34 @@ public class CheckController : ControllerBase
             Subjects = x.Subjects,
             Users = x.Users
         }).ToList());
+    }
+    
+    [Authorize(ERole.Teacher)]
+    [HttpGet("GetTestsToCheck")]
+    public IActionResult GetTestsToCheck()
+    {
+        var user = HttpContext.Items["User"] as User;
+
+        if (user == null)
+        {
+            return (BadRequest("Auth error!"));
+        }
+
+        var sessions = _checkService.GetTestsToCheck(user.Id);
+        
+        return Ok(sessions.Select(x => new SessionResponse()
+        {
+            Success = true,
+            StartDateTime = x.StartDatetime,
+            TimeLimit = x.TimeLimitDatetime,
+            TopicInfo = _catalogService.GetTopic(x.TopicId),
+            Questions = x.Answers.Select(x => new QuestionResponse()
+            {
+                QuestionId = x.QuestionId,
+                QuestionImageId = x.Question.ImageId,
+                AnswerImageId = x.ImageId,
+                Body = x.Question.Body
+            }).ToList()
+        }));
     }
 }
