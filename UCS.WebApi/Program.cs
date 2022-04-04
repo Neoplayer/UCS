@@ -27,6 +27,7 @@ builder.Services.AddSingleton<IUserService, UserService>();
 builder.Services.AddSingleton<ICatalogService, CatalogService>();
 builder.Services.AddSingleton<IImageService, ImageService>();
 builder.Services.AddSingleton<ITestSessionService, TestSessionService>();
+builder.Services.AddSingleton<ICheckService, CheckService>();
 
 IConfiguration config = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")

@@ -3,5 +3,6 @@
 public enum ERole
 {
     Admin = 1,
-    Student = 2
+    Teacher = 2,
+    Student = 3
 }
