@@ -34,7 +34,8 @@ public class CatalogController : ControllerBase
         var jsonCatalog = JsonConvert.SerializeObject(catalog, new JsonSerializerSettings()
         {
             MaxDepth = 1,
-            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            Formatting = Formatting.Indented
         });
 
         return Ok(jsonCatalog);

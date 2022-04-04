@@ -69,7 +69,7 @@ namespace UCS.WebApi.Services
         {
             using MainContext context = new MainContext();
 
-            return context.Users.FirstOrDefault(x => x.Id == id);
+            return context.Users.Include(x => x.Roles).FirstOrDefault(x => x.Id == id);
         }
 
         // helper methods
