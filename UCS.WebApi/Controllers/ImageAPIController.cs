@@ -31,7 +31,7 @@ public class ImageController : ControllerBase
     //     return BadRequest();
     // }
  
-    [HttpPost("GetFileByGuid")]
+    [HttpGet("GetFileByGuid")]
     public FileContentResult GetFiles(Guid imageGuid)
     {
         var image = _imageService.GetImage(imageGuid);
