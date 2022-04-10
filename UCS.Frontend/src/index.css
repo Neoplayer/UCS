@@ -1,0 +1,81 @@
+@font-face {
+  font-family: 'SourceSansPro';
+  src: local("SourceSansPro"), url('./fonts/SourceSansPro-Regular.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'SourceSansPro-Black';
+  src: local("SourceSansPro-Black"), url('./fonts/SourceSansPro-Black.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'SourceSansPro-BlackItalic';
+  src: local("SourceSansPro-BlackItalic"), url('./fonts/SourceSansPro-BlackItalic.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'SourceSansPro-Bold';
+  src: local("SourceSansPro-Bold"), url('./fonts/SourceSansPro-Bold.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'SourceSansPro-BoldItalic';
+  src: local("SourceSansPro-BoldItalic"), url('./fonts/SourceSansPro-BoldItalic.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'SourceSansPro-ExtraLight';
+  src: local("SourceSansPro-ExtraLight"), url('./fonts/SourceSansPro-ExtraLight.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'SourceSansPro-SemiBold';
+  src: local("SourceSansPro-SemiBold"), url('./fonts/SourceSansPro-SemiBold.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'PressStart2P';
+  src: local("PressStart2P-Regular"), url('./fonts/PressStart2P-Regular.ttf') format("ttf");
+}
+
+
+
+@font-face {
+  font-family: 'Righteous-Regular';
+  src: local("Righteous-Regular"), url('./fonts/Righteous-Regular.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'Bungee-Regular';
+  src: local("Bungee-Regular"), url('./fonts/Bungee-Regular.ttf') format("truetype");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'SourceSansPro';
+  /* font-family: Righteous-Regular; */
+
+}
+
+.colors {
+  background: #3c70ff;
+  box-shadow: 0px 0px 15px 0px rgba(34, 60, 80, 0.2);
+
+}
+
+.itmo-h1 {
+  font-family: "Righteous-Regular";
+}
+
+a {
+  color: inherit;
+  /* blue colors for links too */
+  text-decoration: inherit;
+  /* no underline */
+  text-align: center;
+}

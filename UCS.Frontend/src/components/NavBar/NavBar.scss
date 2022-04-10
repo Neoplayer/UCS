@@ -1,0 +1,89 @@
+.NavBar {
+    position: relative;
+    display: flex;
+
+    .nav {
+        position: fixed;
+        justify-self: center;
+        background-color: rgb(0, 102, 255);
+        width: 300px;
+        height: 100vh;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        grid-gap: 10px;
+
+
+        .itmo-h1 {
+            font-size: 40px;
+            letter-spacing: 2px;
+            line-height: 1;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .person {
+            text-align: center;
+            line-break: auto;
+            font-size: 18px;
+        }
+
+        .nav-link {
+            font-size: 20px;
+            color: aliceblue;
+            border: 1px solid transparent;
+            width: 100%;
+            padding: 10px;
+            background: rgb(60, 112, 255);
+            border-radius: 10px;
+            transition: all .3s ease-in;
+
+            &:hover {
+                border: 1px solid rgb(190, 185, 255);
+                box-shadow: 0px 0px 15px 0px rgba(34, 60, 80, 0.2);
+
+            }
+        }
+
+        .nav-link-active {
+            font-size: 20px;
+            color: aliceblue;
+            border: 1px solid rgb(255, 255, 255);
+            width: 100%;
+            padding: 10px;
+            background: rgb(60, 112, 255);
+            border-radius: 10px;
+            transition: all .3s ease-in;
+
+            &:hover {
+
+                box-shadow: 0px 0px 15px 0px rgba(34, 60, 80, 0.2);
+
+            }
+        }
+
+        .avatar-wrapper {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgb(211, 211, 211);
+
+            .avatar {
+                max-height: 140px;
+                max-width: 140px;
+            }
+        }
+    }
+
+    .content {
+        position: relative;
+        left: 300px;
+        padding: 20px;
+        height: 100%;
+        width: calc(100% - 300px);
+    }
+}

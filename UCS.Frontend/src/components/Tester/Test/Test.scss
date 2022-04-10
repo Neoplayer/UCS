@@ -1,0 +1,118 @@
+.Test {
+    position: relative;
+
+    .header-text {
+        text-align: center;
+    }
+
+    .questions {
+        display: flex;
+        flex-direction: column;
+        grid-gap: 10px;
+    }
+
+    .quest-wrapper {
+        color: white;
+        background: #3c70ff;
+        border: 1px solid lightgray;
+        border-radius: 10px;
+        padding: 15px;
+
+        .quest-number {
+            text-align: center;
+        }
+    }
+
+    .finish-btn-wrapper {
+        width: 100%;
+        // background: red;
+        padding: 20px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .finish-btn {
+            width: 400px;
+            border: 2px solid #3c70ff;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all .3s ease-in;
+            font-weight: bold;
+            font-family: "SourceSansPro-Bold";
+            font-size: 16px;
+
+            &:hover {
+                box-shadow: 0px 0px 15px 0px rgba(34, 60, 80, 0.2);
+                border: 2px solid lightcoral;
+                color: red
+            }
+        }
+    }
+
+    .fullpage-sure-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        z-index: 30;
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(5px);
+        background-color: rgba(255, 255, 255, 0.2); // opacity: 0.5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: all .2s ease-in;
+
+        .sure-wrapper {
+            padding: 40px;
+            background: #3c70ff;
+            z-index: 40;
+            border-radius: 10px 40px;
+            border: 1px solid gray;
+
+            .sure-text {
+                color: white;
+                margin-bottom: 20px;
+            }
+
+            .btn-sure-wrapper {
+                width: 100%;
+                display: flex;
+                justify-content: space-evenly;
+
+                button {
+                    cursor: pointer;
+                    background: white;
+                    width: 140px;
+                    padding: 20px;
+                    border: 2px solid gray;
+                    border-radius: 10px;
+                    font-weight: bold;
+                    font-size: 18px;
+                }
+
+                .yes:hover {
+                    border: 2px solid rgb(0, 255, 0);
+                    background: rgb(208, 255, 208);
+                }
+
+                .no:hover {
+                    border: 2px solid rgb(255, 0, 0);
+                    background: rgb(255, 170, 170);
+                }
+            }
+        }
+
+    }
+
+    .active {
+        transition: all .3s ease-in;
+        visibility: visible;
+        opacity: 1;
+    }
+}
