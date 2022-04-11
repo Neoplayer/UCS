@@ -2,31 +2,7 @@ import React, { useMemo, useState } from "react";
 import { GetImageByGuid, SendRemoveAnswer, SendUserAnswerImg } from "../../../../api/api";
 import "./Questions.scss";
 import clip from "./clip.png";
-
-const UserData = ({ image, index, questionId, token }) => {
-  const CurrentImg = image.find((el) => el.index === index);
-
-  if (CurrentImg.data === null) return null;
-
-  const onDelete = () => {
-    SendRemoveAnswer(questionId, token);
-  };
-
-  return (
-    <div className="user-data">
-      <img
-        className="user-data-img"
-        src={URL.createObjectURL(CurrentImg.data)}
-        alt={CurrentImg.data.name}
-      />
-      <p className="user-data-name">{CurrentImg.data.name}</p>
-      <p className="user-data-size">{CurrentImg.data.size} Байт</p>
-      <button className="user-data-deleteImg" onClick={onDelete}>
-        Удалить ответ
-      </button>
-    </div>
-  );
-};
+import UserData from "./UserData";
 
 const Question = ({ quest, token }) => {
   let InitionalUserFiles = [...Array(quest.length)].map((arr, i) => {
@@ -35,7 +11,7 @@ const Question = ({ quest, token }) => {
 
   const [UserFiles, setUserFiles] = useState(InitionalUserFiles);
 
-  const handleUpload = (event, index, questionId) => {
+  const handleUpload = async (event, index, questionId) => {
     console.log(event);
     let data = event.target.files[0];
     const fileObject = {
@@ -49,7 +25,7 @@ const Question = ({ quest, token }) => {
     // send to server
     const formData = new FormData();
     formData.append("file", data);
-    SendUserAnswerImg(formData, token, questionId);
+    await SendUserAnswerImg(formData, token, questionId);
   };
 
   const QuestionMap = useMemo(() => {
@@ -88,9 +64,11 @@ const Question = ({ quest, token }) => {
               </label>
 
               <UserData
-                image={UserFiles}
+                setUserFiles={setUserFiles}
+                UserFiles={UserFiles}
                 index={i}
                 questionId={el.questionId}
+                answerImageId={el.answerImageId}
                 token={token}
               />
             </div>
@@ -99,7 +77,9 @@ const Question = ({ quest, token }) => {
       );
     });
   }, [quest, UserFiles]);
+
   if (!quest) return null;
+
   return <div className="Question">{QuestionMap}</div>;
 };
 

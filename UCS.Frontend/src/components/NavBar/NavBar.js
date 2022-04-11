@@ -1,13 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import "./NavBar.scss";
 import { useLocation } from "react-router-dom";
+import Context from "../../context/Context";
+
 const NavBar = () => {
-  const [Peeps, setPeeps] = useState(1);
+  const { User } = useContext(Context);
+  const [Peeps, setPeeps] = useState(70);
   let location = useLocation();
+
   useEffect(() => {
-    const RandomPeep = Math.floor(Math.random() * 94) + 1;
-    setPeeps(RandomPeep);
+    if (User.User) {
+      let Nickname = User.User.username;
+      let counter = 0;
+      for (let index = 0; index < Nickname.length; index++) {
+        let ascii = Nickname[index].charCodeAt(0);
+        counter += ascii;
+      }
+      let PeepsNumb = (counter % 94) + 1;
+      setPeeps(PeepsNumb);
+      // for (let index = 0; index < User.User.username.length; index++) {
+      //   const element = array[index];
+      //   console.log(User.User.username);
+      // }
+    }
+
+    // const RandomPeep = Math.floor(Math.random() * 94) + 1;
+    // setPeeps(RandomPeep);
     return () => {};
   }, []);
 

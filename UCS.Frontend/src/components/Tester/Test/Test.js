@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Test.scss";
 import { GetActiveSession, SendFinishSession } from "../../../api/api";
 import Context from "../../../context/Context";
