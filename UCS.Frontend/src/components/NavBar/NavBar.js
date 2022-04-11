@@ -38,7 +38,7 @@ const NavBar = () => {
         </Link>
         <br />
 
-        <h1 className="person">Аман Даниил Владимирович</h1>
+        <h1 className="person">{User.User && User.User.username }</h1>
         <div className="avatar-wrapper">
           <img
             src={`${process.env.PUBLIC_URL}/peeps/peep-${Peeps}.png`}
