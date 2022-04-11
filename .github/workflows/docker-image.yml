@@ -14,10 +14,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Down
+    - name: Down active containers
       run: docker-compose -f docker-compose.yml down --rmi all 
-    - name: Remove
-      run: docker-compose -f docker-compose.yml rm 
     - name: Build the Docker image
       run: docker-compose -f docker-compose.yml build
     - name: Run Docker image
