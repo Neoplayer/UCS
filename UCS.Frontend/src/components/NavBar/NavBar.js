@@ -6,7 +6,7 @@ import Context from "../../context/Context";
 
 const NavBar = () => {
   const { User } = useContext(Context);
-  const [Peeps, setPeeps] = useState(70);
+  const [Peeps, setPeeps] = useState(20);
   let location = useLocation();
 
   useEffect(() => {
