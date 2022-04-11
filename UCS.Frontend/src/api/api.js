@@ -1,4 +1,4 @@
-const _URL = "http://194.58.107.109";
+const _URL = "http://194.58.107.109:5000";
 
 export const FetchReq = async (url, token = null, method = "GET", ownHeader = null) => {
   let requestOptions = null;

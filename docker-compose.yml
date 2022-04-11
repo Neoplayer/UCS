@@ -3,10 +3,23 @@
 version: '3.4'
 
 services:
+
   webapitest:
     image: webapitest
     build:
       context: .
       dockerfile: ./UCS.WebApi/Dockerfile
     ports:
-      - 80:80
+      - 5000:5000
+  
+  frontend:
+    container_name: frontend
+    image: frontend
+    build: 
+      context: ./UCS.Frontend
+      dockerfile: Dockerfile
+    volumes:
+      - '/app'
+      - '/app/node_modules'
+    ports:
+      - 80:3000
