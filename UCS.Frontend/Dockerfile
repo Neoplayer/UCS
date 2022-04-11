@@ -12,6 +12,8 @@ COPY package.json ./
 COPY package-lock.json ./
 
 # RUN npm cache clean --force
+RUN npm cache clean --force
+
 
 RUN npm install
 # RUN npm install react-scripts@5.0.0 -g
