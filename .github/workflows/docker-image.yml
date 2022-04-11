@@ -20,5 +20,7 @@ jobs:
       run: docker-compose -f docker-compose.yml build
     - name: Run Docker image
       run: docker-compose -f docker-compose.yml up -d
-    - name: Clear old image
+    - name: Clear old images
       run: docker system prune -f
+    - name: Clear old volumes
+      run: docker volume prune -f
