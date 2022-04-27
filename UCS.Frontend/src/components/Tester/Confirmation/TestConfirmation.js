@@ -27,7 +27,7 @@ const TestConfirmation = () => {
     if (!isActiveSession.success && isActiveSession.message === "No active sessions") {
       const StartSessionTest = await GetStartSession(id, User.token);
       if (StartSessionTest.success) {
-        navigate("/tester");
+        navigate("/tester", { replace: true });
       } else {
         alert("Проблемы с сервером");
       }

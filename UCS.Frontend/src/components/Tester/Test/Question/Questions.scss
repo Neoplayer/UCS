@@ -106,6 +106,10 @@
                     }
                 }
 
+                .label-hidden {
+                    display: none;
+                }
+
                 // .user-file {
                 //     max-width: 300px;
                 //     width: min-content;
@@ -126,6 +130,7 @@
                     }
 
                     .user-data-deleteImg {
+                    margin-top: 10px;
                         border: 2px solid lightgray;
                         border-radius: 10px;
                         background: white;
@@ -136,6 +141,7 @@
                         height: 30px;
                         color: gray;
                         cursor: pointer;
+
                         &:hover {
                             border: 2px solid lightcoral;
                             color: lightcoral;

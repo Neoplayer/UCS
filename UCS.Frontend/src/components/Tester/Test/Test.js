@@ -13,14 +13,20 @@ const Test = () => {
   const [ActiveSession, setActiveSession] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [IsReadyToCloseSession, setIsReadyToCloseSession] = useState(false);
+
   useEffect(() => {
+    let onLoad = true;
     GetActiveSession(User.token).then((res) => {
-      console.log(res);
-      setActiveSession(res);
-      setIsLoading(false);
+      if (onLoad) {
+        console.log(res);
+        setActiveSession(res);
+        setIsLoading(false);
+      }
     });
 
-    return () => {};
+    return () => {
+      onLoad = false;
+    };
   }, []);
 
   if (isLoading) return <h1>Загрузка...</h1>;
@@ -58,8 +64,12 @@ const Test = () => {
         <div className="sure-wrapper">
           <h1 className="sure-text">Завершить выполнение ?</h1>
           <div className="btn-sure-wrapper">
-            <button onClick={ReadyFinishTest} className="yes">ДА</button>
-            <button onClick={AbortFinishTest} className="no">НЕТ</button>
+            <button onClick={ReadyFinishTest} className="yes">
+              ДА
+            </button>
+            <button onClick={AbortFinishTest} className="no">
+              НЕТ
+            </button>
           </div>
         </div>
       </div>

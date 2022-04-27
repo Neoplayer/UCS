@@ -6,12 +6,22 @@ import Context from "../../context/Context";
 
 const NavBar = () => {
   const { User } = useContext(Context);
-  const [Peeps, setPeeps] = useState(20);
+  const [Peeps, setPeeps] = useState(null);
+  const [UserNavBar, setUserNavBar] = useState({
+    lastName: "",
+    firstName: "",
+    middleName: "",
+  });
   let location = useLocation();
 
   useEffect(() => {
-    if (User.User) {
-      let Nickname = User.User.username;
+    if (User.user && User.token) {
+      setUserNavBar({
+        lastName: User.user.lastName,
+        firstName: User.user.firstName,
+        middleName: User.user.middleName,
+      });
+      let Nickname = User.user.username;
       let counter = 0;
       for (let index = 0; index < Nickname.length; index++) {
         let ascii = Nickname[index].charCodeAt(0);
@@ -19,16 +29,9 @@ const NavBar = () => {
       }
       let PeepsNumb = (counter % 94) + 1;
       setPeeps(PeepsNumb);
-      // for (let index = 0; index < User.User.username.length; index++) {
-      //   const element = array[index];
-      //   console.log(User.User.username);
-      // }
     }
-
-    // const RandomPeep = Math.floor(Math.random() * 94) + 1;
-    // setPeeps(RandomPeep);
     return () => {};
-  }, []);
+  }, [User.user, User.token]);
 
   return (
     <div className="NavBar">
@@ -39,15 +42,16 @@ const NavBar = () => {
         <br />
 
         <h1 className="person">
-          {User.User &&
-            `${User.User.lastName} ${User.User.firstName} ${User.User.middleName}`}
+          {`${UserNavBar.lastName} ${UserNavBar.firstName} ${UserNavBar.middleName}`}
         </h1>
         <div className="avatar-wrapper">
-          <img
-            src={`${process.env.PUBLIC_URL}/peeps/peep-${Peeps}.png`}
-            alt="avatar"
-            className="avatar"
-          />
+          {Peeps && (
+            <img
+              src={`${process.env.PUBLIC_URL}/peeps/peep-${Peeps}.png`}
+              alt="avatar"
+              className="avatar"
+            />
+          )}
         </div>
 
         <NavLink
@@ -73,6 +77,12 @@ const NavBar = () => {
           to={"/academicPerformance"}
         >
           Ведомость
+        </NavLink>
+        <NavLink
+          className={({ isActive }) => (isActive ? "nav-link-active" : "nav-link")}
+          to={"/checkStudents"}
+        >
+          Проверка работ
         </NavLink>
         <NavLink
           className={({ isActive }) => (isActive ? "nav-link-active" : "nav-link")}

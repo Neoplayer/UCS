@@ -11,6 +11,8 @@ import { useEffect, useState } from "react";
 import RequireAuth from "./components/Auth/RequireAuth/RequireAuth";
 import Test from "./components/Tester/Test/Test";
 import TestConfirmation from "./components/Tester/Confirmation/TestConfirmation";
+import CheckStudents from "./components/CheckStudents/CheckStudents";
+import NewUser from "./components/Auth/NewUser/NewUser";
 
 const App = () => {
   const navigate = useNavigate();
@@ -38,8 +40,6 @@ const App = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
 
-
-
   const contx = { User, setUser };
 
   return (
@@ -48,6 +48,7 @@ const App = () => {
         <Route index path="/login" element={<Login />} />
         <Route path="/forgetPass" element={<ForgetPassword />} />
         <Route path="/logout" element={<LogOut />} />
+        <Route path="/newUser" element={<NewUser />} />
         <Route path="/" element={<NavBar />}>
           <Route
             path="subject"
@@ -65,9 +66,23 @@ const App = () => {
               </RequireAuth>
             }
           ></Route>
-          {/* <Route path="/tester" element={<Test />} /> */}
-          <Route path="/testerConfirm/:id" element={<TestConfirmation />} />
+          <Route
+            path="/testerConfirm/:id"
+            element={
+              <RequireAuth>
+                <TestConfirmation />
+              </RequireAuth>
+            }
+          />
           <Route path="academicPerformance" element={<AcademicPerformance />} />
+          <Route
+            path="checkStudents"
+            element={
+              <RequireAuth>
+                <CheckStudents />
+              </RequireAuth>
+            }
+          />
         </Route>
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>

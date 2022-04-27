@@ -16,7 +16,7 @@ const Login = () => {
       getUserByToken(token)
         .then((res) => {
           if (!res.message) {
-            setUser({ User: res, token: token });
+            setUser({ user: res, token: token });
             return true;
           }
           return false;
@@ -46,17 +46,27 @@ const Login = () => {
         }}
       >
         <h1 className="form-header">Авторизация</h1>
-        <label className="form-label">
+
           <input placeholder="Логин" type="login" required name="login" />
-        </label>
-        <label className="form-label">
-          <input placeholder="Пароль" type="password" name="password" autoComplete="on" required />
-        </label>
-        <input className="form-input" type="submit" value="Войти" />
-        <hr />
-        <Link to={"/forgetPass"} className="btn-forget">
-          Забыл/а пароль
-        </Link>
+
+          <input
+            placeholder="Пароль"
+            type="password"
+            name="password"
+            autoComplete="on"
+            required
+          />
+
+        <input className="form-submit" type="submit" value="Войти" />
+        <hr style={{width: '100%'}} />
+        <div className="btn-wrapper">
+          <Link to={"/forgetPass"} className="btn-forget">
+            Забыл/а пароль
+          </Link>
+          <Link to={"/newUser"} className="btn-new">
+            Новый пользователь
+          </Link>
+        </div>
       </form>
     </div>
   );

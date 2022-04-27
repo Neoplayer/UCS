@@ -8,14 +8,27 @@ const UserData = ({
   questionId,
   token,
   answerImageId,
+  body,
+  questionImageId,
 }) => {
+  let URLuploadIMG = null;
+
   const onDelete = async () => {
     try {
       const answer = await SendRemoveAnswer(questionId, token);
       if (answer.success) {
         let newArr = [...UserFiles];
-        newArr[index] = { index: index, data: null };
+        newArr[index] = { ...UserFiles[index], userData: null, answerImageId: null };
         setUserFiles(newArr);
+        URLuploadIMG = null;
+        // let newQuestionArr = [...Question];
+        // newQuestionArr[index] = {
+        //   answerImageId: null,
+        //   body: body,
+        //   questionId: questionId,
+        //   questionImageId: questionImageId,
+        // };
+        // setQuestion(newQuestionArr);
       }
     } catch (error) {
       console.log(error);
@@ -37,19 +50,19 @@ const UserData = ({
     );
   }
 
-  const CurrentImg = UserFiles.find((el) => el.index === index);
-
-  if (CurrentImg.data === null) return null;
+  if (UserFiles[index].userData === null) return null;
+  console.log("UserFiles[index]", UserFiles[index]);
+  URLuploadIMG = URL.createObjectURL(UserFiles[index].userData.data);
 
   return (
     <div className="user-data">
       <img
         className="user-data-img"
-        src={URL.createObjectURL(CurrentImg.data)}
-        alt={CurrentImg.data.name}
+        src={URLuploadIMG}
+        alt={UserFiles[index].userData.data.name}
       />
-      <p className="user-data-name">{CurrentImg.data.name}</p>
-      <p className="user-data-size">{CurrentImg.data.size} Байт</p>
+      <p className="user-data-name">{UserFiles[index].userData.data.name}</p>
+      <p className="user-data-size">{UserFiles[index].userData.data.size} Байт</p>
       <button className="user-data-deleteImg" onClick={onDelete}>
         Удалить ответ
       </button>

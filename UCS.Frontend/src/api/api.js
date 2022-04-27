@@ -1,7 +1,7 @@
 const _URL = "http://194.58.107.109:5000";
 
 export const FetchReq = async (url, token = null, method = "GET", ownHeader = null) => {
-  let requestOptions = null;
+  let requestOptions = undefined;
   if (ownHeader) requestOptions = ownHeader;
   else {
     requestOptions = {
@@ -75,3 +75,10 @@ export const SendFinishSession = async (token) => {
     response.json(),
   );
 };
+
+export const getGroupsToCheck = async (token) => {
+  return await FetchReq("/Check/GetGroups", token).then((response) =>
+    response.json(),
+  );
+};
+
