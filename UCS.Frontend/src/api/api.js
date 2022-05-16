@@ -77,8 +77,5 @@ export const SendFinishSession = async (token) => {
 };
 
 export const getGroupsToCheck = async (token) => {
-  return await FetchReq("/Check/GetGroups", token).then((response) =>
-    response.json(),
-  );
+  return await FetchReq("/Check/GetGroups", token).then((response) => response.json());
 };
-

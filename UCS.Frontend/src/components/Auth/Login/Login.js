@@ -30,7 +30,6 @@ const Login = () => {
 
   const SubmitForm = async (e) => {
     e.preventDefault();
-    console.log(e.target[0].value, e.target[1].value);
     const UserData = await sendLogin(e.target[0].value, e.target[1].value);
     setUser(UserData);
     localStorage.setItem("token", UserData.token);
@@ -58,15 +57,15 @@ const Login = () => {
           />
 
         <input className="form-submit" type="submit" value="Войти" />
-        <hr style={{width: '100%'}} />
-        <div className="btn-wrapper">
-          <Link to={"/forgetPass"} className="btn-forget">
+        {/* <hr style={{width: '100%'}} /> */}
+        {/* <div className="btn-wrapper"> */}
+          {/* <Link to={"/forgetPass"} className="btn-forget">
             Забыл/а пароль
-          </Link>
-          <Link to={"/newUser"} className="btn-new">
+          </Link> */}
+          {/* <Link to={"/newUser"} className="btn-new">
             Новый пользователь
-          </Link>
-        </div>
+          </Link> */}
+        {/* </div> */}
       </form>
     </div>
   );

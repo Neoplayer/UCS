@@ -46,9 +46,9 @@ const App = () => {
     <Context.Provider value={contx}>
       <Routes>
         <Route index path="/login" element={<Login />} />
-        <Route path="/forgetPass" element={<ForgetPassword />} />
+        {/* <Route path="/forgetPass" element={<ForgetPassword />} /> */}
         <Route path="/logout" element={<LogOut />} />
-        <Route path="/newUser" element={<NewUser />} />
+        {/* <Route path="/newUser" element={<NewUser />} /> */}
         <Route path="/" element={<NavBar />}>
           <Route
             path="subject"
