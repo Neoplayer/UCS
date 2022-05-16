@@ -34,7 +34,7 @@ namespace UCS.DbProvider.Migrations
 
                     b.HasIndex("QuestionsId");
 
-                    b.ToTable("GradeQuestion");
+                    b.ToTable("GradeQuestion", (string)null);
                 });
 
             modelBuilder.Entity("GroupSubject", b =>
@@ -49,7 +49,7 @@ namespace UCS.DbProvider.Migrations
 
                     b.HasIndex("SubjectsId");
 
-                    b.ToTable("GroupSubject");
+                    b.ToTable("GroupSubject", (string)null);
                 });
 
             modelBuilder.Entity("GroupUser", b =>
@@ -64,7 +64,7 @@ namespace UCS.DbProvider.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("GroupUser");
+                    b.ToTable("GroupUser", (string)null);
                 });
 
             modelBuilder.Entity("RoleUser", b =>
@@ -79,7 +79,7 @@ namespace UCS.DbProvider.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("RoleUser");
+                    b.ToTable("RoleUser", (string)null);
                 });
 
             modelBuilder.Entity("UCS.DbProvider.Models.Chapter", b =>
@@ -100,7 +100,7 @@ namespace UCS.DbProvider.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("Chapters");
+                    b.ToTable("Chapters", (string)null);
                 });
 
             modelBuilder.Entity("UCS.DbProvider.Models.Faculty", b =>
@@ -116,7 +116,7 @@ namespace UCS.DbProvider.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Faculties");
+                    b.ToTable("Faculties", (string)null);
                 });
 
             modelBuilder.Entity("UCS.DbProvider.Models.Grade", b =>
@@ -135,7 +135,7 @@ namespace UCS.DbProvider.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Grades");
+                    b.ToTable("Grades", (string)null);
                 });
 
             modelBuilder.Entity("UCS.DbProvider.Models.Group", b =>
@@ -156,7 +156,7 @@ namespace UCS.DbProvider.Migrations
 
                     b.HasIndex("FacultyId");
 
-                    b.ToTable("Groups");
+                    b.ToTable("Groups", (string)null);
                 });
 
             modelBuilder.Entity("UCS.DbProvider.Models.Image", b =>
@@ -185,7 +185,7 @@ namespace UCS.DbProvider.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Images");
+                    b.ToTable("Images", (string)null);
                 });
 
             modelBuilder.Entity("UCS.DbProvider.Models.Question", b =>
@@ -224,7 +224,7 @@ namespace UCS.DbProvider.Migrations
 
                     b.HasIndex("TopicId");
 
-                    b.ToTable("Questions");
+                    b.ToTable("Questions", (string)null);
                 });
 
             modelBuilder.Entity("UCS.DbProvider.Models.QuestionTheme", b =>
@@ -240,7 +240,7 @@ namespace UCS.DbProvider.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("QuestionThemes");
+                    b.ToTable("QuestionThemes", (string)null);
                 });
 
             modelBuilder.Entity("UCS.DbProvider.Models.QuestionType", b =>
@@ -256,7 +256,7 @@ namespace UCS.DbProvider.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("QuestionTypes");
+                    b.ToTable("QuestionTypes", (string)null);
                 });
 
             modelBuilder.Entity("UCS.DbProvider.Models.Role", b =>
@@ -272,7 +272,7 @@ namespace UCS.DbProvider.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Roles", (string)null);
                 });
 
             modelBuilder.Entity("UCS.DbProvider.Models.SessionAnswer", b =>
@@ -308,7 +308,7 @@ namespace UCS.DbProvider.Migrations
 
                     b.HasIndex("TestSessionId");
 
-                    b.ToTable("SessionAnswers");
+                    b.ToTable("SessionAnswers", (string)null);
                 });
 
             modelBuilder.Entity("UCS.DbProvider.Models.Subject", b =>
@@ -327,7 +327,7 @@ namespace UCS.DbProvider.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Subjects");
+                    b.ToTable("Subjects", (string)null);
                 });
 
             modelBuilder.Entity("UCS.DbProvider.Models.TestSession", b =>
@@ -359,7 +359,7 @@ namespace UCS.DbProvider.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("TestSessions");
+                    b.ToTable("TestSessions", (string)null);
                 });
 
             modelBuilder.Entity("UCS.DbProvider.Models.Topic", b =>
@@ -383,7 +383,7 @@ namespace UCS.DbProvider.Migrations
 
                     b.HasIndex("ChapterId");
 
-                    b.ToTable("Topics");
+                    b.ToTable("Topics", (string)null);
                 });
 
             modelBuilder.Entity("UCS.DbProvider.Models.TopicRule", b =>
@@ -414,7 +414,7 @@ namespace UCS.DbProvider.Migrations
 
                     b.HasIndex("TopicId");
 
-                    b.ToTable("TopicRule");
+                    b.ToTable("TopicRule", (string)null);
                 });
 
             modelBuilder.Entity("UCS.DbProvider.Models.User", b =>
@@ -456,7 +456,7 @@ namespace UCS.DbProvider.Migrations
 
                     b.HasIndex("ImageId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("GradeQuestion", b =>

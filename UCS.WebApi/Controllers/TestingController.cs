@@ -93,6 +93,7 @@ public class TestingController : ControllerBase
             Success = true,
             StartDateTime = session.StartDatetime,
             TimeLimit = session.TimeLimitDatetime,
+            TimeLeft = session.TimeLimitDatetime - DateTime.UtcNow,
             TopicInfo = _catalogService.GetTopic(session.TopicId),
             Questions = session.Answers.Select(x => new QuestionResponse()
             {

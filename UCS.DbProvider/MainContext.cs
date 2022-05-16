@@ -20,8 +20,14 @@ namespace UCS.DbProvider
         public DbSet<TestSession> TestSessions { get; set; }
         public DbSet<SessionAnswer> SessionAnswers { get; set; }
         public DbSet<Image> Images { get; set; }
+        //public DbSet<RegisterSession> RegisterSessions { get; set; }
 
-
+        // protected override void OnModelCreating(ModelBuilder modelBuilder)
+        // {
+        //     modelBuilder.Entity<User>()
+        //         .HasOne(p => p.RegistrationSession)
+        //         .WithMany(b => b.RegisteredUsers);
+        // }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseNpgsql("Host=89.108.77.44;Port=5432;Database=UCSDB;Username=postgres;Password=kah4haiPeaNg");
     }

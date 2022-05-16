@@ -23,6 +23,12 @@ namespace UCS.DbProvider.Models
         public int Ages { get; set; }
         public DateTime RegistrationDate { get; set; }
 
+        
+        
+        // public Guid RegistrationSessionId { get; set; }
+        // public RegisterSession RegistrationSession { get; set; }
+        
+        
         [JsonIgnore]
         [IgnoreDataMember]
         public virtual ICollection<Role> Roles { get; set; }
