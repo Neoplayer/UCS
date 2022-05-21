@@ -1,3 +1,5 @@
+using UCS.DbProvider.Models;
+
 namespace UCS.WebApi.Dto.Session
 {
     public class SessionResponse : ResponseBase
@@ -6,6 +8,8 @@ namespace UCS.WebApi.Dto.Session
         public DateTime StartDateTime { get; set; }
         public DateTime TimeLimit { get; set; }
         public TimeSpan TimeLeft { get; set; }
+
+        public User User { get; set; }
 
         public List<QuestionResponse> Questions { get; set; }
     }

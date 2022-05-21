@@ -14,14 +14,14 @@ public class CheckController : ControllerBase
 {
     ICheckService _checkService;
     ICatalogService _catalogService;
-    
+
     public CheckController(ICheckService checkService, ICatalogService catalogService)
     {
         _catalogService = catalogService;
         _checkService = checkService;
     }
-    
-    
+
+
     [Authorize(ERole.Admin)]
     [HttpGet("GetDataAdmin")]
     public IActionResult GetDataAdmin()
@@ -37,7 +37,7 @@ public class CheckController : ControllerBase
 
         return Ok();
     }
-    
+
     [Authorize(ERole.Student)]
     [HttpGet("GetDataStudent")]
     public IActionResult GetDataStudent()
@@ -45,8 +45,8 @@ public class CheckController : ControllerBase
 
         return Ok();
     }
-    
-    
+
+
     [Authorize(ERole.Teacher)]
     [HttpGet("GetGroups")]
     public IActionResult GetGroups()
@@ -59,7 +59,7 @@ public class CheckController : ControllerBase
         }
 
         var groups = _checkService.GetGroups(user);
-        
+
         return Ok(groups.Select(x => new GroupResponse()
         {
             Success = true,
@@ -68,7 +68,7 @@ public class CheckController : ControllerBase
             Users = x.Users
         }).ToList());
     }
-    
+
     [Authorize(ERole.Teacher)]
     [HttpGet("GetTestsToCheck")]
     public IActionResult GetTestsToCheck()
@@ -81,13 +81,14 @@ public class CheckController : ControllerBase
         }
 
         var sessions = _checkService.GetTestsToCheck(user.Id);
-        
+
         return Ok(sessions.Select(x => new SessionResponse()
         {
             Success = true,
             StartDateTime = x.StartDatetime,
             TimeLimit = x.TimeLimitDatetime,
             TopicInfo = _catalogService.GetTopic(x.TopicId),
+            User = x.User,
             Questions = x.Answers.Select(x => new QuestionResponse()
             {
                 QuestionId = x.QuestionId,
