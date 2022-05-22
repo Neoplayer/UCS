@@ -3,7 +3,7 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 import "./NavBar.scss";
 import { useLocation } from "react-router-dom";
 import Context from "../../context/Context";
-
+import itmo_logo from './itmo_logo.png';
 const NavBar = () => {
   const { User } = useContext(Context);
   const [Peeps, setPeeps] = useState(null);
@@ -36,8 +36,8 @@ const NavBar = () => {
   return (
     <div className="NavBar">
       <div className="nav">
-        <Link className="itmo-h1" to={"/subject"}>
-          ITMO UNIVERSITY
+        <Link className="itmo-logo" to={"/subject"}>
+          <img src={itmo_logo} alt="ITMO" />
         </Link>
         <br />
 
@@ -72,12 +72,12 @@ const NavBar = () => {
         >
           Тестирование
         </NavLink>
-        <NavLink
+        {/* <NavLink
           className={({ isActive }) => (isActive ? "nav-link-active" : "nav-link")}
           to={"/academicPerformance"}
         >
           Ведомость
-        </NavLink>
+        </NavLink> */}
         <NavLink
           className={({ isActive }) => (isActive ? "nav-link-active" : "nav-link")}
           to={"/checkStudents"}

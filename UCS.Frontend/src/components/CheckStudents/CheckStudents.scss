@@ -1,9 +1,201 @@
-.CheckStudents{
+.CheckStudents {
     width: 100%;
     height: 100%;
-    .header-text{
+
+    .header-text {
         width: 100%;
         text-align: center;
         margin-bottom: 20px;
+    }
+
+    .find-wrapper {
+        width: 100%;
+        // background: rgb(88, 88, 88);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .find {
+            max-width: 500px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            input {
+                width: 100%;
+                height: 30px;
+                outline: 0;
+                padding: 2px 15px;
+                font-size: 18px;
+                border: 0;
+                border-bottom: 1px solid gray;
+                border-radius: 10px 10px 0 0;
+
+                &:focus {
+                    border-bottom: 1px solid black;
+                    box-shadow: 0 0 5px 0 lightgray;
+
+                }
+            }
+
+            img {
+                max-height: 50px;
+                max-width: 50px;
+                border-radius: 50%;
+                cursor: pointer;
+                transition: all .2s ease-in;
+                &:hover {
+                    box-shadow: 0 0 5px 0 lightgray;
+                }
+                &:active{
+                    transform: scale(1.2);
+                }
+            }
+
+
+        }
+
+    }
+
+    .users {
+        list-style: none;
+        margin-left: 25px;
+
+        .user {
+            margin: 2px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+
+            &:hover {
+                box-shadow: 0 0 10px 0 gray;
+
+                .name {
+                    color: blue;
+                }
+
+                .date-pass {
+                    color: black;
+                }
+            }
+
+            .user-personal-data {
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+                padding: 5px;
+
+
+
+
+
+                .way {
+                    color: gray;
+                }
+
+                .date-pass {
+                    color: rgb(175, 175, 175);
+                    font-family: monospace;
+                    font-size: 14px;
+                }
+            }
+
+            .space-divider {
+                padding: 0 5px;
+            }
+        }
+
+        .num {
+            padding-right: 5px;
+        }
+
+        .active-user {
+            font-weight: bold;
+
+            &:hover {
+                .name {
+                    color: red;
+                }
+            }
+
+            .way,
+            .date-pass {
+                color: black !important;
+            }
+        }
+
+
+        .check-wrapper {
+            padding: 5px;
+
+            .question {
+                padding: 0 20px;
+            }
+
+            .img-wrapper {
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                flex-wrap: wrap;
+                grid-gap: 10px;
+                border-bottom: 2px solid gray;
+                padding: 10px;
+
+
+                img {
+                    min-height: 100px;
+                    min-width: 100px;
+                    max-width: 550px;
+                    max-height: 550px;
+                    background: gray;
+                }
+            }
+
+            &:last-child {
+                .img-wrapper {
+                    border-bottom: 2px solid transparent;
+                }
+            }
+        }
+    }
+}
+
+.FullScreenImg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(128, 128, 128, 0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .close {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        cursor: pointer;
+        border-radius: 50%;
+        border: 2px solid red;
+        right: 20px;
+        top: 20px;
+        width: 70px;
+        height: 70px;
+
+        &:hover {
+            box-shadow: 0 0 20px 0 red inset;
+            color: red;
+        }
+    }
+
+    .img {
+        min-height: 100px;
+        min-width: 100px;
+        max-width: 90vw;
+        max-height: 90vh;
     }
 }

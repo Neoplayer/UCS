@@ -15,12 +15,15 @@
         grid-gap: 10px;
 
 
-        .itmo-h1 {
-            font-size: 40px;
-            letter-spacing: 2px;
-            line-height: 1;
-            text-align: center;
+        .itmo-logo {
             text-decoration: none;
+
+            img {
+                max-width: 280px;
+                max-height: 170px;
+                border-radius: 20px;
+            }
+
         }
 
         .person {

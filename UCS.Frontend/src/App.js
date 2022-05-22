@@ -12,11 +12,12 @@ import RequireAuth from "./components/Auth/RequireAuth/RequireAuth";
 import Test from "./components/Tester/Test/Test";
 import TestConfirmation from "./components/Tester/Confirmation/TestConfirmation";
 import CheckStudents from "./components/CheckStudents/CheckStudents";
-import NewUser from "./components/Auth/NewUser/NewUser";
+// import NewUser from "./components/Auth/NewUser/NewUser";
 
 const App = () => {
   const navigate = useNavigate();
   let location = useLocation();
+  
   const [User, setUser] = useState({
     user: {
       id: null,

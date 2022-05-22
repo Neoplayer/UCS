@@ -6,11 +6,12 @@ import "./SubjectStyle.scss";
 
 const Subject = () => {
   const { User } = useContext(Context);
+  
   const [Subjects, setSubjects] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  
   useEffect(() => {
     getSubjects(User.token).then((res) => {
-      console.log(res);
       setSubjects(res);
       setIsLoading(false);
     });

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 const SubjectsMap = ({ Subjects }) => {
   const [ActiveSubjectsID, setActiveSubjectsID] = useState([]);
@@ -17,8 +16,11 @@ const SubjectsMap = ({ Subjects }) => {
     }
   };
 
+
   return Subjects.map((subject, i) => {
+    
     const ChaptersMap = subject.Chapters.map((chapt, i) => {
+
       const TopicsMap = chapt.Topics.map((top, i) => {
         return (
           <Link to={"/testerConfirm/" + top.Id} key={i} className="topic">
@@ -52,5 +54,4 @@ const SubjectsMap = ({ Subjects }) => {
     );
   });
 };
-
 export default SubjectsMap;

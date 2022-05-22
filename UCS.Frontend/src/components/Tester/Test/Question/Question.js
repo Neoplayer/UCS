@@ -16,7 +16,6 @@ const Question = ({ quest, token }) => {
   const [dragCounter, setDragCounter] = useState(0);
   const [isDragNow, setIsDragNow] = useState(false);
   const [FilesToUpload, setFilesToUpload] = useState([]);
-  console.log("isDragNow: ", isDragNow);
   // console.log("UserFiles", UserFiles);
 
   // const handleUpload = async (event, index, questionId) => {
@@ -43,7 +42,6 @@ const Question = ({ quest, token }) => {
 
   const QuestionMap = useMemo(() => {
     return UserFiles.map((el, i) => {
-      console.log(i, el);
       let showLabelUpload = true;
       if (UserFiles[i].answerImageId || UserFiles[i].userData) {
         showLabelUpload = false;
@@ -60,7 +58,7 @@ const Question = ({ quest, token }) => {
             <div className="img-wrapper">
               <img
                 className="quest-img"
-                src={GetImageByGuid(el.questionImageId, token)}
+                src={GetImageByGuid(el.questionImageId)}
                 alt="Картинка вопроса"
               />
             </div>

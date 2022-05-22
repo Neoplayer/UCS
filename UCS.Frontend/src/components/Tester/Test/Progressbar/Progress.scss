@@ -1,0 +1,25 @@
+.progress-wrapper {
+    position: fixed;
+    bottom: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    background: rgba(137, 137, 137, 0.444);
+    overflow: hidden;
+    width: calc(100vw - 350px);
+    transition: all .3s linear;
+    .progress {
+        width: 100%;
+    }
+}
+.bg-yellow{
+    background: rgba(238, 255, 0, 0.444);
+}
+.bg-light-red{
+    background: rgba(255, 53, 53, 0.444);
+}
+.bg-red{
+    background: rgba(255, 0, 0, 0.444);
+}
+.bg-end{
+    background: rgba(255, 0, 0, 1);
+}

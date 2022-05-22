@@ -6,22 +6,31 @@ import "./TestConfirmation.scss";
 import time from "./time.png";
 
 const TestConfirmation = () => {
-  let { id } = useParams();
   const navigate = useNavigate();
   const { User } = useContext(Context);
   const [TopicInfo, setTopicInfo] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  
+  let { id } = useParams();
   useEffect(() => {
     getTopicInfo(id).then((res) => {
       if (res.topicInfo) {
         setTopicInfo(res.topicInfo);
         setIsLoading(false);
       }
+      if (res.success === false) {
+        setIsError("Выбранная вами контрольная работа не найдена");
+        setIsLoading(false);
+      }
     });
   }, []);
 
-  if (isLoading || !TopicInfo) return <h1>Загрузка...</h1>;
+  if (isLoading) return <h1>Загрузка...</h1>;
 
+  if (isError) {
+    return <h1>{isError}</h1>;
+  }
   const StartSession = async () => {
     const isActiveSession = await GetActiveSession(User.token);
     if (!isActiveSession.success && isActiveSession.message === "No active sessions") {
@@ -54,7 +63,7 @@ const TestConfirmation = () => {
           <div className="time-wrapper">
             <img src={time} alt="time" className="time-img" />
             <p className="timer">
-              Время для выполнения <span className="time">{TopicInfo.timeLimit}</span>{" "}
+              Время для выполнения <span className="time">{TopicInfo.timeLimit}</span>
             </p>
           </div>
         </div>

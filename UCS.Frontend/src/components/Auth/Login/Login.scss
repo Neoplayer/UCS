@@ -27,12 +27,6 @@
             align-self: center;
         }
 
-        // .form-label {
-        //     display: flex;
-        //     justify-content: center;
-        //     align-items: center;
-        //     font-size: 18px;
-
         input {
             outline: none;
             background: white;
@@ -44,19 +38,14 @@
             border-radius: 5px;
             border: 1px solid black;
             transition: all .3s ease-in;
-
             &:focus {
                 border: 1px solid rgb(134, 125, 255);
                 box-shadow: 0px 0px 15px 0px rgba(34, 60, 80, 0.2);
-
             }
-
             &::placeholder {
                 font-size: 15px;
             }
         }
-
-        // }
 
         .form-submit {
             cursor: pointer;
