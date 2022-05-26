@@ -32,8 +32,6 @@ const HandleUploadImg = async (
       );
     }
   });
-
-  // alert !
 };
 
 export default HandleUploadImg;

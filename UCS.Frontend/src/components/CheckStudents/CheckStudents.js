@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./CheckStudents.scss";
-import { getGroupsToCheck, GetTestsToCheck } from "../../api/api";
+import { GetTestsToCheck } from "../../api/api";
 import Context from "../../context/Context";
 import UsersAnswers from "./UsersAnswers";
 import FullScreenImg from "./FullScreenImg";
@@ -10,18 +10,17 @@ import { onAlert } from "../Alert/Aler";
 const CheckStudents = () => {
   const { User } = useContext(Context);
 
-  const [isLoading, setIsLoading] = useState(true);
   const [CheckArr, setCheckArr] = useState(null);
   const [TestToCheck, setTestToCheck] = useState([]);
   const [FilteredTestToCheck, setFilteredTestToCheck] = useState(null);
   const [ImageGuid, setImageGuid] = useState(null);
+  
+  const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(null);
-
   useEffect(() => {
     let onLoad = true;
     GetTestsToCheck(User.token).then((res) => {
       if (onLoad) {
-        console.log("GetTestsToCheck", res);
         if (res.message) {
           onLoad = true;
           setIsError("У вас недостаточно прав");
@@ -32,14 +31,6 @@ const CheckStudents = () => {
         }
       }
     });
-    // getGroupsToCheck(User.token).then((res) => {
-    //   if (onLoad) {
-    //     console.log("getGroupsToCheck", res);
-    //     console.log(res);
-    //     setCheckArr(res);
-    //   }
-    // });
-
     return () => {
       onLoad = false;
     };
@@ -69,7 +60,7 @@ const CheckStudents = () => {
 
   return (
     <div className="CheckStudents">
-      <h1 className="header-text">Проверка работ студентов</h1>
+      <h1 className="header-text">Проверка контрольных работ</h1>
       <FindByName onFilter={onFilter} />
       <UsersAnswers
         TestToCheck={FilteredTestToCheck ? FilteredTestToCheck : TestToCheck}

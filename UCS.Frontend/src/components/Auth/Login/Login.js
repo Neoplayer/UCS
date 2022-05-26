@@ -16,7 +16,6 @@ const Login = () => {
     if (token) {
       getUserByToken(token)
         .then((res) => {
-          console.log("getUserByToken", res);
           if (!res.message) {
             setUser({ user: res, token: token });
             return true;

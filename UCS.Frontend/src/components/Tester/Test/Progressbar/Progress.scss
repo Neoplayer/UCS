@@ -7,19 +7,34 @@
     overflow: hidden;
     width: calc(100vw - 350px);
     transition: all .3s linear;
+    display: flex;
+
     .progress {
         width: 100%;
     }
+
+    .time-wrapper {
+        width: 160px;
+        font-family: monospace;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 5px;
+    }
 }
-.bg-yellow{
+
+.bg-yellow {
     background: rgba(238, 255, 0, 0.444);
 }
-.bg-light-red{
+
+.bg-light-red {
     background: rgba(255, 53, 53, 0.444);
 }
-.bg-red{
-    background: rgba(255, 0, 0, 0.444);
+
+.bg-red {
+    background: rgba(255, 0, 0, 0.6);
 }
-.bg-end{
+
+.bg-end {
     background: rgba(255, 0, 0, 1);
 }

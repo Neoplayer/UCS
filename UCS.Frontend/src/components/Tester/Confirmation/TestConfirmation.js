@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { GetActiveSession, GetStartSession, getTopicInfo } from "../../../api/api";
 import Context from "../../../context/Context";
+import { onAlert } from "../../Alert/Aler";
 import "./TestConfirmation.scss";
 import time from "./time.png";
 
@@ -41,7 +42,7 @@ const TestConfirmation = () => {
         alert("Проблемы с сервером");
       }
     } else {
-      alert("У вас уже есть активный тест");
+      onAlert("У вас уже открыта сессия с контрольной работой", 'error')
     }
   };
 
