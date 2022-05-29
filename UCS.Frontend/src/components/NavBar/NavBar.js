@@ -13,17 +13,22 @@ const NavBar = () => {
     lastName: "",
     firstName: "",
     middleName: "",
+    userHaveAccess: false,
   });
-  let location = useLocation();
-
   const [NavBarVisible, setNavBarVisible] = useState(true);
+
+  let location = useLocation();
 
   useEffect(() => {
     if (User.user && User.token) {
+      let min = null;
+      if (User.user.roles) min = Math.min(...User.user.roles.map((item) => item.id));
+
       setUserNavBar({
         lastName: User.user.lastName,
         firstName: User.user.firstName,
         middleName: User.user.middleName,
+        userHaveAccess: min < 3,
       });
       let Nickname = User.user.username;
       let counter = 0;
@@ -33,7 +38,6 @@ const NavBar = () => {
       }
       let PeepsNumb = (counter % 94) + 1;
       setPeeps(PeepsNumb);
-      console.log(window.screen);
       if (window.screen.width <= 1000) {
         setNavBarVisible(false);
       }
@@ -93,13 +97,17 @@ const NavBar = () => {
         >
           Тестирование
         </NavLink>
-        <NavLink
-          // onClick={() => setNavBarVisible((prev) => !prev)}
-          className={({ isActive }) => (isActive ? "nav-link-active" : "nav-link")}
-          to={"/checkStudents"}
-        >
-          Проверка работ
-        </NavLink>
+
+        {UserNavBar.userHaveAccess ? (
+          <NavLink
+            // onClick={() => setNavBarVisible((prev) => !prev)}
+            className={({ isActive }) => (isActive ? "nav-link-active" : "nav-link")}
+            to={"/checkStudents"}
+          >
+            Проверка работ
+          </NavLink>
+        ) : null}
+
         <NavLink
           // onClick={() => setNavBarVisible((prev) => !prev)}
           className={({ isActive }) => (isActive ? "nav-link-active" : "nav-link")}
