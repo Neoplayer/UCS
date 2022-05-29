@@ -12,6 +12,7 @@ import RequireAuth from "./components/Auth/RequireAuth/RequireAuth";
 import Test from "./components/Tester/Test/Test";
 import TestConfirmation from "./components/Tester/Confirmation/TestConfirmation";
 import CheckStudents from "./components/CheckStudents/CheckStudents";
+import MobileQR from "./components/MobileQR/MobileQR";
 // import NewUser from "./components/Auth/NewUser/NewUser";
 
 const App = () => {
@@ -50,6 +51,8 @@ const App = () => {
         {/* <Route path="/forgetPass" element={<ForgetPassword />} /> */}
         <Route path="/logout" element={<LogOut />} />
         {/* <Route path="/newUser" element={<NewUser />} /> */}
+
+        <Route path="/mobile" element={<MobileQR />} />
         <Route path="/" element={<NavBar />}>
           <Route
             path="subject"

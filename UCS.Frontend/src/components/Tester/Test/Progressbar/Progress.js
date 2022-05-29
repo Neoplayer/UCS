@@ -3,7 +3,7 @@ import { SecForSolve, StringToSec, toHHMMSS } from "../TimeUtils";
 import "./Progress.scss";
 import ValueToClass from "./ValueToClass";
 
-const Progress = ({ ProgressValue, Time }) => {
+const Progress = ({ ProgressValue, Time, setIsQRVisible }) => {
   const Max = useMemo(() => SecForSolve(Time.startDateTime, Time.timeLimit), [Time]);
   const MaxStr = useMemo(() => toHHMMSS(Max), [Time]);
 
@@ -13,6 +13,9 @@ const Progress = ({ ProgressValue, Time }) => {
 
   return (
     <div className={`progress-wrapper ${bg}`}>
+      <button onClick={() => setIsQRVisible(true)} className="QR-btn">
+        QR
+      </button>
       <progress className="progress" value={ProgressValue} max={Max}></progress>
       <div className="time-wrapper">
         <span>{MaxStr}</span>

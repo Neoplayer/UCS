@@ -8,6 +8,7 @@ import Progress from "./Progressbar/Progress";
 import { onAlert } from "../../Alert/Aler";
 import ConfirmeEnd from "./ConfirmeEnd/ConfirmeEnd";
 import { SecForSolve, StringToSec } from "./TimeUtils";
+import QR from "./QR/QR";
 
 const Test = () => {
   const { User } = useContext(Context);
@@ -18,6 +19,8 @@ const Test = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [IsReadyToCloseSession, setIsReadyToCloseSession] = useState(false);
   const [ProgressValue, setProgressValue] = useState(0);
+  const [isQRVisible, setIsQRVisible] = useState(false);
+
   useEffect(() => {
     let onLoad = true;
     GetActiveSession(User.token).then((res) => {
@@ -88,12 +91,14 @@ const Test = () => {
     <div className="Test">
       <h1 className="header-text">{ActiveSession.topicInfo.topicName}</h1>
       <Question quest={ActiveSession.questions} token={User.token} />
-      <Progress ProgressValue={ProgressValue} Time={ActiveSession} />
+      <Progress setIsQRVisible={setIsQRVisible} ProgressValue={ProgressValue} Time={ActiveSession} />
       <div className="finish-btn-wrapper">
         <button className="finish-btn" onClick={onFinishTest}>
           Завершить выполнение
         </button>
       </div>
+
+      <QR isQRVisible={isQRVisible} setIsQRVisible={setIsQRVisible} />
 
       <ConfirmeEnd
         IsReadyToCloseSession={IsReadyToCloseSession}

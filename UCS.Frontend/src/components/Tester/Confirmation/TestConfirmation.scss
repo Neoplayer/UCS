@@ -9,7 +9,7 @@
 
     .alarm-baner {
         max-width: 800px;
-        height: 500px;
+        min-height: 500px;
         width: 100%;
         border: 2px solid lightgray;
         border-radius: 15px;
@@ -18,6 +18,11 @@
         font-family: "SourceSansPro";
         background: #3c70ff;
         color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
 
         .header-text {
             font-family: 'SourceSansPro-Bold';
@@ -27,7 +32,7 @@
         }
 
         .info-wrapper {
-            height: 350px;
+            word-wrap: break-word;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -83,7 +88,7 @@
             display: flex;
             align-items: center;
             justify-content: space-around;
-
+            grid-gap: 20px;
             .btn-back,
             .btn-confirm {
                 color: white;
@@ -117,5 +122,44 @@
             }
         }
 
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .TestConfirmation {
+        .alarm-baner {
+
+
+            min-height: calc(100vh - 100px);
+            overflow-y: auto;
+            
+            .header-text{
+                font-size: 24px;
+            }
+            
+            .btn-wrapper{
+                flex-direction: column;
+                grid-gap: 10px;
+
+                .btn-back,
+                .btn-confirm{
+                    width: calc(100vw - 80px);
+                }
+            }
+
+            .info-wrapper {
+                align-items: flex-start;
+                height: fit-content;
+                .subject,
+                .charapter,
+                .topic,
+                .text-info {
+                    padding-left: 5px;
+                    // overflow-wrap: break-all;
+                    word-break: break-word;
+                }
+
+            }
+        }
     }
 }

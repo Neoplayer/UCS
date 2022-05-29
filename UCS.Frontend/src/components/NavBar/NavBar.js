@@ -3,7 +3,9 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 import "./NavBar.scss";
 import { useLocation } from "react-router-dom";
 import Context from "../../context/Context";
-import itmo_logo from './itmo_logo.png';
+import itmo_logo from "./itmo_logo.png";
+import navbarImg from "./navbar.svg";
+
 const NavBar = () => {
   const { User } = useContext(Context);
   const [Peeps, setPeeps] = useState(null);
@@ -13,6 +15,8 @@ const NavBar = () => {
     middleName: "",
   });
   let location = useLocation();
+
+  const [NavBarVisible, setNavBarVisible] = useState(true);
 
   useEffect(() => {
     if (User.user && User.token) {
@@ -29,13 +33,28 @@ const NavBar = () => {
       }
       let PeepsNumb = (counter % 94) + 1;
       setPeeps(PeepsNumb);
+      console.log(window.screen);
+      if (window.screen.width <= 1000) {
+        setNavBarVisible(false);
+      }
     }
     return () => {};
   }, [User.user, User.token]);
 
+  const moveNav = () => {
+    setNavBarVisible((prev) => !prev);
+  };
+
+  const ArrowToRight = <p>&#10097;</p>;
+  const ArrowToLeft = <p>&#10096;</p>;
+
   return (
     <div className="NavBar">
-      <div className="nav">
+      <button onClick={moveNav} className="nav-visible-btn">
+        {NavBarVisible ? ArrowToLeft : ArrowToRight}
+        <img src={navbarImg} alt="show/hiden" />
+      </button>
+      <div className={`nav ${NavBarVisible ? "active" : "non-active"}`}>
         <Link className="itmo-logo" to={"/subject"}>
           <img src={itmo_logo} alt="ITMO" />
         </Link>
@@ -55,12 +74,14 @@ const NavBar = () => {
         </div>
 
         <NavLink
+          // onClick={() => setNavBarVisible((prev) => !prev)}
           className={({ isActive }) => (isActive ? "nav-link-active" : "nav-link")}
           to={"/subject"}
         >
           Дисциплины
         </NavLink>
         <NavLink
+          // onClick={() => setNavBarVisible((prev) => !prev)}
           className={({ isActive }) => {
             if (isActive) return "nav-link-active";
             else {
@@ -72,19 +93,15 @@ const NavBar = () => {
         >
           Тестирование
         </NavLink>
-        {/* <NavLink
-          className={({ isActive }) => (isActive ? "nav-link-active" : "nav-link")}
-          to={"/academicPerformance"}
-        >
-          Ведомость
-        </NavLink> */}
         <NavLink
+          // onClick={() => setNavBarVisible((prev) => !prev)}
           className={({ isActive }) => (isActive ? "nav-link-active" : "nav-link")}
           to={"/checkStudents"}
         >
           Проверка работ
         </NavLink>
         <NavLink
+          // onClick={() => setNavBarVisible((prev) => !prev)}
           className={({ isActive }) => (isActive ? "nav-link-active" : "nav-link")}
           to={"/logout"}
         >
