@@ -29,7 +29,6 @@ namespace UCS.DbProvider.Models
         // public RegisterSession RegistrationSession { get; set; }
         
         
-        [JsonIgnore]
         [IgnoreDataMember]
         public virtual ICollection<Role> Roles { get; set; }
         [JsonIgnore]

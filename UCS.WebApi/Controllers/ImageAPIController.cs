@@ -16,20 +16,20 @@ public class ImageController : ControllerBase
     }
     
     
-    // [HttpPost("Upload")]
-    // public async Task<IActionResult> AddFile(IFormFile uploadedFile)
-    // {
-    //     if (uploadedFile != null)
-    //     {
-    //         await using var memoryStream = new MemoryStream();
-    //         await uploadedFile.CopyToAsync(memoryStream);
-    //         var res = _imageService.UploadImage(memoryStream.ToArray());
-    //
-    //         return Ok(res);
-    //     }
-    //         
-    //     return BadRequest();
-    // }
+    [HttpPost("Upload")]
+    public async Task<IActionResult> AddFile(IFormFile uploadedFile)
+    {
+        if (uploadedFile != null)
+        {
+            await using var memoryStream = new MemoryStream();
+            await uploadedFile.CopyToAsync(memoryStream);
+            var res = _imageService.UploadImage(memoryStream.ToArray());
+    
+            return Ok(res);
+        }
+            
+        return BadRequest();
+    }
  
     [HttpGet("GetFileByGuid")]
     public FileContentResult GetFiles(Guid imageGuid)
