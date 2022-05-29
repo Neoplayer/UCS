@@ -46,7 +46,6 @@ const CheckStudents = () => {
         if (item.user.middleName.toLowerCase() === text.toLowerCase()) return true;
         return false;
       });
-      console.log("filter", filter);
       if (filter.length === 0) {
         setFilteredTestToCheck(null);
         onAlert("Ничего не найдено", "error");

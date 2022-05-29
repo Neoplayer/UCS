@@ -16,7 +16,6 @@ const UserData = ({
   const onDelete = async () => {
     try {
       const answer = await SendRemoveAnswer(questionId, token)
-      console.log(answer);
       if (answer.success) {
         let newArr = [...UserFiles];
         newArr[index] = { ...UserFiles[index], userData: null, answerImageId: null };

@@ -6,10 +6,6 @@ const MobileQR = () => {
   const navigate = useNavigate();
   const [IsValid, setIsValid] = useState(true);
   useEffect(() => {
-    console.log("====================================");
-    console.log(searchParams.get("token"));
-    console.log("====================================");
-
     if (searchParams.get("token") && searchParams.get("token") !== "") {
       localStorage.setItem("token", searchParams.get("token"));
       navigate("/tester");

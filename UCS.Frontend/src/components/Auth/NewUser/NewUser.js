@@ -14,7 +14,7 @@ const NewUser = () => {
       return;
     }
 
-    console.log("submited");
+
   };
 
   return (
