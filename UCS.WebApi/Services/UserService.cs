@@ -34,7 +34,7 @@ namespace UCS.WebApi.Services
         {
             using MainContext context = new MainContext();
 
-            var user = context.Users.SingleOrDefault(x => x.Username == model.Username && x.Password == model.Password);
+            var user = context.Users.Include(x => x.Roles).SingleOrDefault(x => x.Username == model.Username && x.Password == model.Password);
 
             // return null if user not found
             if (user == null) return null;
