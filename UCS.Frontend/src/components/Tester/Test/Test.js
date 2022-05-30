@@ -9,6 +9,7 @@ import { onAlert } from "../../Alert/Aler";
 import ConfirmeEnd from "./ConfirmeEnd/ConfirmeEnd";
 import { SecForSolve, StringToSec } from "./TimeUtils";
 import QR from "./QR/QR";
+import FullScreenImg from "./FullScreenImg/FullScreenImg";
 
 const Test = () => {
   const { User } = useContext(Context);
@@ -20,6 +21,7 @@ const Test = () => {
   const [IsReadyToCloseSession, setIsReadyToCloseSession] = useState(false);
   const [ProgressValue, setProgressValue] = useState(0);
   const [isQRVisible, setIsQRVisible] = useState(false);
+  const [FullImgData, setFullImgData] = useState(null);
 
   useEffect(() => {
     let onLoad = true;
@@ -90,8 +92,16 @@ const Test = () => {
   return (
     <div className="Test">
       <h1 className="header-text">{ActiveSession.topicInfo.topicName}</h1>
-      <Question quest={ActiveSession.questions} token={User.token} />
-      <Progress setIsQRVisible={setIsQRVisible} ProgressValue={ProgressValue} Time={ActiveSession} />
+      <Question
+        quest={ActiveSession.questions}
+        token={User.token}
+        setFullImgData={setFullImgData}
+      />
+      <Progress
+        setIsQRVisible={setIsQRVisible}
+        ProgressValue={ProgressValue}
+        Time={ActiveSession}
+      />
       <div className="finish-btn-wrapper">
         <button className="finish-btn" onClick={onFinishTest}>
           Завершить выполнение
@@ -99,6 +109,8 @@ const Test = () => {
       </div>
 
       <QR isQRVisible={isQRVisible} setIsQRVisible={setIsQRVisible} />
+
+      <FullScreenImg FullImgData={FullImgData} setFullImgData={setFullImgData} />
 
       <ConfirmeEnd
         IsReadyToCloseSession={IsReadyToCloseSession}

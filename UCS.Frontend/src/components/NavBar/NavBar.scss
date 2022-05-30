@@ -2,6 +2,7 @@
     position: relative;
     display: flex;
 
+
     .nav-visible-btn {
         visibility: hidden;
         background: rgb(0, 0, 0);
@@ -15,7 +16,7 @@
         position: fixed;
         left: 10px;
         top: 10px;
-        z-index: 200;
+        z-index: 60;
         cursor: pointer;
         display: flex;
         justify-content: center;
@@ -53,7 +54,7 @@
         grid-gap: 10px;
         // opacity: 1;
         transition: all .3s ease-in;
-        z-index: 150;
+        z-index: 50;
 
         .itmo-logo {
             text-decoration: none;
@@ -144,6 +145,7 @@
             visibility: visible;
         }
         .content {
+            margin-top: 25px;
             left: 0px;
             width: 100%;
         }

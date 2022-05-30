@@ -7,7 +7,7 @@ import { onAlert } from "../../../Alert/Aler";
 import { HandleDrag, HandleDragIn, HandleDragOut, HandleDrop } from "./DragFunc";
 import HandleUploadImg from "./HandleUploadImg";
 
-const Question = ({ quest, token }) => {
+const Question = ({ quest, token, setFullImgData }) => {
   let InitionalUserFiles = [...Array(quest.length)].map((arr, i) => {
     return { ...quest[i], index: i, userData: null };
   });
@@ -16,29 +16,6 @@ const Question = ({ quest, token }) => {
   const [dragCounter, setDragCounter] = useState(0);
   const [isDragNow, setIsDragNow] = useState(false);
   const [FilesToUpload, setFilesToUpload] = useState([]);
-  // console.log("UserFiles", UserFiles);
-
-  // const handleUpload = async (event, index, questionId) => {
-  //   let data = event.target.files[0];
-  //   const fileObject = {
-  //     index: index,
-  //     data: data,
-  //   };
-  //   let newArr = [...UserFiles];
-  //   // newArr[index] = fileObject;
-  //   newArr[index] = {
-  //     ...UserFiles[index],
-  //     userData: fileObject,
-  //   };
-  //   setUserFiles(newArr);
-  //   // send to server
-  //   const formData = new FormData();
-  //   formData.append("file", data);
-  //   await SendUserAnswerImg(formData, token, questionId);
-
-  //   // alert !
-  //   onAlert("Ответ был сохранен и отправлен");
-  // };
 
   const QuestionMap = useMemo(() => {
     return UserFiles.map((el, i) => {
@@ -60,6 +37,9 @@ const Question = ({ quest, token }) => {
                 className="quest-img"
                 src={GetImageByGuid(el.questionImageId)}
                 alt="Картинка вопроса"
+                onClick={() =>
+                  setFullImgData({ imgUrl: el.questionImageId, question: el.body })
+                }
               />
             </div>
 

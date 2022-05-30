@@ -1,24 +1,31 @@
-.QR {
+.FullScreenQuestion {
     position: fixed;
     top: 0;
     left: 0;
-    height: 100vh;
     width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    z-index: 80;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    visibility: hidden;
-    background-color: rgba(0, 0, 0, 0.2);
-    opacity: 0;
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
-    transition: all .2s ease-in;
-    z-index: 202;
 
-    .qr-code {
-        width: 200px;
-        height: 200px;
-        background-color: red;
+    .question-text{
+        background: rgba(255, 255, 255, 0.3);
+        max-width: 80vw;
+        padding: 5px 10px;
+        border-radius: 5px;
+        margin-bottom: 5px;
+    }
+
+    .quest-img {
+        max-width: 90vw;
+        max-height: 80vh;
+        min-height: 250px;
+        min-width: 250px;
+        background: rgb(227, 227, 227)
     }
 
     .close {
@@ -43,9 +50,4 @@
         }
 
     }
-}
-
-.QR-active {
-    visibility: visible;
-    opacity: 1;
 }
