@@ -95,7 +95,7 @@ const NavBar = () => {
           }}
           to={"/tester"}
         >
-          Тестирование
+          Текущая КР
         </NavLink>
 
         {UserNavBar.userHaveAccess ? (
@@ -104,7 +104,7 @@ const NavBar = () => {
             className={({ isActive }) => (isActive ? "nav-link-active" : "nav-link")}
             to={"/checkStudents"}
           >
-            Проверка работ
+            Проверка КР
           </NavLink>
         ) : null}
 
