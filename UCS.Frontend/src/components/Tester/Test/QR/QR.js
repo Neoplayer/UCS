@@ -3,15 +3,14 @@ import "./QR.scss";
 import { QRCodeSVG } from "qrcode.react";
 
 const QR = ({ isQRVisible, setIsQRVisible }) => {
+  const token = localStorage.getItem("token");
   return (
     <div
       onClick={() => setIsQRVisible(false)}
       className={`QR ${isQRVisible ? "QR-active" : ""}`}
     >
       <QRCodeSVG
-        value={
-          "http://194.58.107.109/mobile?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYmYiOjE2NTM4NDU0NDcsImV4cCI6MTY1NDQ1MDI0NywiaWF0IjoxNjUzODQ1NDQ3fQ.Jdr4zUcT6Wf0WMlmaMg7ixdZ29ozy-zWxEJWDgNcbjg"
-        }
+        value={`http://194.58.107.109/mobile?token=${token}`}
         size={512}
         bgColor={"#ffffff"}
         fgColor={"#000000"}
