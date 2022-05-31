@@ -18,6 +18,9 @@ public class TestSession
     public DateTime? FinishDatetime { get; set; }
     public DateTime TimeLimitDatetime { get; set; }
 
+    public int? Result { get; set; }
+    public string? Comment { get; set; }
+
     [JsonIgnore]
     [IgnoreDataMember]
     public virtual ICollection<SessionAnswer> Answers { get; set; }

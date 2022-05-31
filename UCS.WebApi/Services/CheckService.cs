@@ -11,6 +11,9 @@ public interface ICheckService
 {
     ICollection<Group> GetGroups(User user);
     ICollection<TestSession> GetTestsToCheck(int userId);
+    bool SetTestResilt(int sessionId, int result, string comment);
+    ICollection<TestSession> GetArchive(int userId);
+    ICollection<TestSession> GetCheckedTests(int userId);
 }
 public class CheckService : ICheckService
 {
@@ -25,6 +28,24 @@ public class CheckService : ICheckService
             .Where(x => x.Users.Any(u => u.Roles.Any(r => r.Id == (int) ERole.Teacher) && u.Id == user.Id));
 
         return groups.ToList();
+    }
+
+    public bool SetTestResilt(int sessionId, int result, string comment)
+    {
+        using MainContext context = new MainContext();
+
+        var session = context.TestSessions.FirstOrDefault(x => x.Id == sessionId);
+       
+        if(session == null)
+        {
+            return false;
+        }
+
+        session.Result = result;
+        session.Comment = comment;
+
+        context.SaveChanges();
+        return true;
     }
     
     public ICollection<TestSession> GetTestsToCheck(int userId)
@@ -44,7 +65,47 @@ public class CheckService : ICheckService
             .ThenInclude(x => x.Groups)
             .Where(x => x.User.Groups.Count == 1)
             .Where(x => (groupsIds ?? Array.Empty<int>()).Contains(x.User.Groups.FirstOrDefault()!.Id))
-            .Where(x => x.Answers.Any(a => a.GradeId == null)).ToList();
+            .Where(x => x.Result == null)
+            .ToList();
+
+        return sessions;
+    }
+
+    public ICollection<TestSession> GetArchive(int userId)
+    {
+        using MainContext context = new MainContext();
+
+        var groupsIds = context.Users
+                        .Include(x => x.Groups)
+                        .FirstOrDefault(x => x.Id == userId)
+                        ?.Groups
+                        .Select(x => x.Id);
+
+        var sessions = context.TestSessions
+            .Include(x => x.Answers)
+            .ThenInclude(x => x.Question)
+            .Include(x => x.User)
+            .ThenInclude(x => x.Groups)
+            .Where(x => x.User.Groups.Count == 1)
+            .Where(x => (groupsIds ?? Array.Empty<int>()).Contains(x.User.Groups.FirstOrDefault()!.Id))
+            .Where(x => x.Result != null)
+            .ToList();
+
+        return sessions;
+    }
+
+    public ICollection<TestSession> GetCheckedTests(int userId)
+    {
+        using MainContext context = new MainContext();
+
+        var sessions = context.TestSessions
+                                .Include(x => x.Answers)
+                                .ThenInclude(x => x.Question)
+                                .Include(x => x.User)
+                                .ThenInclude(x => x.Groups)
+                                .Where(x => x.UserId == userId)
+                                .Where(x => x.Result != null)
+                                .ToList();
 
         return sessions;
     }

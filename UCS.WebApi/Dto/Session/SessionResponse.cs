@@ -12,5 +12,8 @@ namespace UCS.WebApi.Dto.Session
         public User User { get; set; }
 
         public List<QuestionResponse> Questions { get; set; }
+
+        public int? Result { get; set; }
+        public string? Comment { get; set; }
     }
 }

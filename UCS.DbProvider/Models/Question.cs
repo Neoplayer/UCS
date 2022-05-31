@@ -13,6 +13,8 @@ public class Question
     public Topic Topic { get; set; }
     public Guid? ImageId { get; set; }
     public Image Image { get; set; }
+    public Guid? HintImageId { get; set; }
+    public Image HintImage { get; set; }
     public int QuestionTypeId { get; set; }
     public QuestionType QuestionType { get; set; }
     public int QuestionThemeId { get; set; }

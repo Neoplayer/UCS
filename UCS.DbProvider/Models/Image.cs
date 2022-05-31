@@ -14,7 +14,4 @@ public class Image
     public DateTime UploadDateTime { get; set; }
     public int Size { get; set; }
     public byte[] ImageBytes { get; set; }
-
-    [JsonIgnore]
-    public virtual ICollection<Question> Questions { get; set; }
 }

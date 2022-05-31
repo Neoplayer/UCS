@@ -22,31 +22,6 @@ public class CheckController : ControllerBase
     }
 
 
-    [Authorize(ERole.Admin)]
-    [HttpGet("GetDataAdmin")]
-    public IActionResult GetDataAdmin()
-    {
-
-        return Ok();
-    }
-
-    [Authorize(ERole.Teacher)]
-    [HttpGet("GetDataTeacher")]
-    public IActionResult GetDataTeacher()
-    {
-
-        return Ok();
-    }
-
-    [Authorize(ERole.Student)]
-    [HttpGet("GetDataStudent")]
-    public IActionResult GetDataStudent()
-    {
-
-        return Ok();
-    }
-
-
     [Authorize(ERole.Teacher)]
     [HttpGet("GetGroups")]
     public IActionResult GetGroups()
@@ -69,6 +44,17 @@ public class CheckController : ControllerBase
         }).ToList());
     }
 
+    
+
+    [Authorize(ERole.Teacher)]
+    [HttpPost("SetTestResult")]
+    public IActionResult SetTestResult(int sessionId, int result, string comment)
+    {
+        var res = _checkService.SetTestResilt(sessionId, result, comment);
+
+        return res ? Ok() : BadRequest("Session not found");
+    }
+
     [Authorize(ERole.Teacher)]
     [HttpGet("GetTestsToCheck")]
     public IActionResult GetTestsToCheck()
@@ -89,6 +75,75 @@ public class CheckController : ControllerBase
             TimeLimit = x.TimeLimitDatetime,
             TopicInfo = _catalogService.GetTopic(x.TopicId),
             User = x.User,
+            Result = x.Result,
+            Comment = x.Comment,
+            Questions = x.Answers.Select(x => new QuestionResponse()
+            {
+                QuestionId = x.QuestionId,
+                QuestionImageId = x.Question.ImageId,
+                AnswerImageId = x.ImageId,
+                Body = x.Question.Body,
+                HintImageId = x.Question.HintImageId
+            }).ToList()
+        }));
+    }
+
+    [Authorize(ERole.Teacher)]
+    [HttpGet("GetArchive")]
+    public IActionResult GetArchive()
+    {
+        var user = HttpContext.Items["User"] as User;
+
+        if (user == null)
+        {
+            return (BadRequest("Auth error!"));
+        }
+
+        var sessions = _checkService.GetArchive(user.Id);
+
+        return Ok(sessions.Select(x => new SessionResponse()
+        {
+            Success = true,
+            StartDateTime = x.StartDatetime,
+            TimeLimit = x.TimeLimitDatetime,
+            TopicInfo = _catalogService.GetTopic(x.TopicId),
+            User = x.User,
+            Result = x.Result,
+            Comment = x.Comment,
+            Questions = x.Answers.Select(x => new QuestionResponse()
+            {
+                QuestionId = x.QuestionId,
+                QuestionImageId = x.Question.ImageId,
+                AnswerImageId = x.ImageId,
+                Body = x.Question.Body,
+                HintImageId = x.Question.HintImageId
+            })
+            .ToList()
+        }));
+    }
+
+
+    [HttpGet("GetCheckedTests")]
+    public IActionResult GetCheckedTests()
+    {
+        var user = HttpContext.Items["User"] as User;
+
+        if (user == null)
+        {
+            return (BadRequest("Auth error!"));
+        }
+
+        var sessions = _checkService.GetCheckedTests(user.Id);
+
+        return Ok(sessions.Select(x => new SessionResponse()
+        {
+            Success = true,
+            StartDateTime = x.StartDatetime,
+            TimeLimit = x.TimeLimitDatetime,
+            TopicInfo = _catalogService.GetTopic(x.TopicId),
+            User = x.User,
+            Result = x.Result,
+            Comment = x.Comment,
             Questions = x.Answers.Select(x => new QuestionResponse()
             {
                 QuestionId = x.QuestionId,
