@@ -48,11 +48,11 @@ public class CheckController : ControllerBase
 
     [Authorize(ERole.Teacher)]
     [HttpPost("SetTestResult")]
-    public IActionResult SetTestResult(int sessionId, int result, string comment)
+    public IActionResult SetTestResult(SetResultRequest model)
     {
-        var res = _checkService.SetTestResilt(sessionId, result, comment);
+        var res = _checkService.SetTestResult(model.SessionId, model.Result, model.Comment);
 
-        return res ? Ok() : BadRequest("Session not found");
+        return res ? Ok(new { Success = res }) : BadRequest("Session not found");
     }
 
     [Authorize(ERole.Teacher)]
@@ -71,6 +71,7 @@ public class CheckController : ControllerBase
         return Ok(sessions.Select(x => new SessionResponse()
         {
             Success = true,
+            Id = x.Id,
             StartDateTime = x.StartDatetime,
             TimeLimit = x.TimeLimitDatetime,
             TopicInfo = _catalogService.GetTopic(x.TopicId),
@@ -104,6 +105,7 @@ public class CheckController : ControllerBase
         return Ok(sessions.Select(x => new SessionResponse()
         {
             Success = true,
+            Id = x.Id,
             StartDateTime = x.StartDatetime,
             TimeLimit = x.TimeLimitDatetime,
             TopicInfo = _catalogService.GetTopic(x.TopicId),
@@ -138,6 +140,7 @@ public class CheckController : ControllerBase
         return Ok(sessions.Select(x => new SessionResponse()
         {
             Success = true,
+            Id = x.Id,
             StartDateTime = x.StartDatetime,
             TimeLimit = x.TimeLimitDatetime,
             TopicInfo = _catalogService.GetTopic(x.TopicId),

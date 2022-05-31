@@ -11,7 +11,7 @@ public interface ICheckService
 {
     ICollection<Group> GetGroups(User user);
     ICollection<TestSession> GetTestsToCheck(int userId);
-    bool SetTestResilt(int sessionId, int result, string comment);
+    bool SetTestResult(int sessionId, int result, string comment);
     ICollection<TestSession> GetArchive(int userId);
     ICollection<TestSession> GetCheckedTests(int userId);
 }
@@ -30,7 +30,7 @@ public class CheckService : ICheckService
         return groups.ToList();
     }
 
-    public bool SetTestResilt(int sessionId, int result, string comment)
+    public bool SetTestResult(int sessionId, int result, string comment)
     {
         using MainContext context = new MainContext();
 
