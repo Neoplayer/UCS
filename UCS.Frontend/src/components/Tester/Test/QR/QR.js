@@ -1,16 +1,18 @@
 import React from "react";
 import "./QR.scss";
 import { QRCodeSVG } from "qrcode.react";
+import { useHref, useLocation } from "react-router-dom";
 
 const QR = ({ isQRVisible, setIsQRVisible }) => {
   const token = localStorage.getItem("token");
+  const location = window.location
   return (
     <div
       onClick={() => setIsQRVisible(false)}
       className={`QR ${isQRVisible ? "QR-active" : ""}`}
     >
       <QRCodeSVG
-        value={`http://194.58.107.109/mobile?token=${token}`}
+        value={`${location.origin}/mobile?token=${token}`}
         size={512}
         bgColor={"#ffffff"}
         fgColor={"#000000"}
