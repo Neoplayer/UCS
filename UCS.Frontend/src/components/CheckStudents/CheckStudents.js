@@ -6,20 +6,22 @@ import UsersAnswers from "./UsersAnswers";
 import FullScreenImg from "./FullScreenImg";
 import FindByName from "./FindByName";
 import { onAlert } from "../Alert/Aler";
+import ResultTestForm from "./ResultTestForm";
+import Archive from "./Archive";
 
 const CheckStudents = () => {
   const { User } = useContext(Context);
 
-  const [CheckArr, setCheckArr] = useState(null);
   const [TestToCheck, setTestToCheck] = useState([]);
   const [FilteredTestToCheck, setFilteredTestToCheck] = useState(null);
   const [ImageGuid, setImageGuid] = useState(null);
-  
+
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(null);
   useEffect(() => {
     let onLoad = true;
     GetTestsToCheck(User.token).then((res) => {
+      console.log(res);
       if (onLoad) {
         if (res.message) {
           onLoad = true;
@@ -65,6 +67,7 @@ const CheckStudents = () => {
         TestToCheck={FilteredTestToCheck ? FilteredTestToCheck : TestToCheck}
         setImageGuid={setImageGuid}
       />
+      <Archive setImageGuid={setImageGuid} />
       <FullScreenImg ImageGuid={ImageGuid} setImageGuid={setImageGuid} />
     </div>
   );

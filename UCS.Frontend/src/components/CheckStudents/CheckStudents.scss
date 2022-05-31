@@ -45,10 +45,12 @@
                 border-radius: 50%;
                 cursor: pointer;
                 transition: all .2s ease-in;
+
                 &:hover {
                     box-shadow: 0 0 5px 0 lightgray;
                 }
-                &:active{
+
+                &:active {
                     transform: scale(1.2);
                 }
             }
@@ -112,6 +114,7 @@
 
         .active-user {
             font-weight: bold;
+            box-shadow: 0 0 10px 0 gray;
 
             &:hover {
                 .name {
@@ -131,6 +134,24 @@
 
             .question {
                 padding: 0 20px;
+            }
+
+            .extraImg-btn {
+                outline: 0;
+                border: 1px solid lightgray;
+                padding: 5px 10px;
+                background: transparent;
+                border-radius: 10px;
+                // margin-top: 10px;
+                margin: 10px 0 0 20px;
+                width: 200px;
+                color: gray;
+                cursor: pointer;
+
+                &:hover {
+                    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.368);
+                    color: black;
+                }
             }
 
             .img-wrapper {
@@ -161,6 +182,99 @@
     }
 }
 
+.ResultTestForm {
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    grid-gap: 10px;
+
+    .estimation {
+        display: flex;
+        grid-gap: 10px;
+
+        p {
+            font-family: monospace;
+        }
+
+        input {
+            outline: 0;
+            border: 0;
+            border-bottom: 1px solid gray;
+            width: 80px;
+            font-weight: bold;
+            text-align: center;
+            padding: 3px 5px;
+        }
+    }
+
+    .comment {
+        display: flex;
+        align-items: center;
+        grid-gap: 10px;
+
+        p {
+            font-family: monospace;
+        }
+
+        textarea {
+            padding: 10px;
+            border: 1px solid gray;
+            outline: 0;
+            border-radius: 10px;
+        }
+    }
+
+    .send-result-btn {
+        width: 100%;
+        outline: 0;
+        border: 2px solid var(--background-box);
+        border-radius: 10px;
+        background: transparent;
+        padding: 5px 10px;
+        cursor: pointer;
+
+        &:hover {
+            border: 2px solid rgb(255, 73, 73);
+        }
+    }
+
+    .sent-result {
+        border: 2px solid lightgreen;
+        box-shadow: 0 0 10px 0 greenyellow inset;
+        color: green;
+        pointer-events: none;
+
+        &:hover {
+            border: 2px solid lightgreen;
+        }
+    }
+
+    .sent-result-hidden {
+        display: none;
+    }
+}
+
+.Archive {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .getArchive-btn {
+        outline: 0;
+        border: 1px solid gray;
+        border-radius: 10px;
+        padding: 5px 20px;
+        background: transparent;
+        cursor: pointer;
+
+        &:hover {
+
+            box-shadow: 0 0 10px lightgray;
+        }
+    }
+}
+
 .FullScreenImg {
     position: fixed;
     top: 0;
@@ -173,6 +287,7 @@
     justify-content: center;
     align-items: center;
     z-index: 201;
+
     .close {
         display: flex;
         justify-content: center;

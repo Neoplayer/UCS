@@ -81,5 +81,25 @@ export const getGroupsToCheck = async (token) => {
 };
 
 export const GetTestsToCheck = async (token) => {
-  return await FetchReq("/Check/GetTestsToCheck", token).then((response) => response.json());
+  return await FetchReq("/Check/GetTestsToCheck", token).then((response) =>
+    response.json(),
+  );
+};
+
+export const sendResultToTest = async (token, sessionId, result, comment) => {
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Authorization: token },
+    body: JSON.stringify({ sessionId: sessionId, result: result, comment: comment }),
+  };
+
+  return await fetch(_URL + "/Check/SetTestResult", requestOptions);
+  // .then((response) =>
+  //   response.json(),
+  // );
+};
+export const GetArchive = async (token) => {
+  return await FetchReq("/Check/GetArchive", token).then((response) =>
+    response.json(),
+  );
 };

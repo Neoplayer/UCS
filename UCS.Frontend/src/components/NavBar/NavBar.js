@@ -107,6 +107,13 @@ const NavBar = () => {
             Проверка КР
           </NavLink>
         ) : null}
+        <NavLink
+          // onClick={() => setNavBarVisible((prev) => !prev)}
+          className={({ isActive }) => (isActive ? "nav-link-active" : "nav-link")}
+          to={"/academicPerformance"}
+        >
+          Ведомость
+        </NavLink>
 
         <NavLink
           // onClick={() => setNavBarVisible((prev) => !prev)}

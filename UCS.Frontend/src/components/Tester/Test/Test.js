@@ -78,7 +78,7 @@ const Test = () => {
   if (isLoading) return <h1>Загрузка...</h1>;
 
   if (!ActiveSession.success) {
-    return <h1>Нет активных тестов</h1>;
+    return <h1>Нет активных контрольных работ</h1>;
   }
 
   const onFinishTest = () => {
