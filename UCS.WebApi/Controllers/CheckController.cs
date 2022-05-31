@@ -71,6 +71,7 @@ public class CheckController : ControllerBase
         return Ok(sessions.Select(x => new SessionResponse()
         {
             Success = true,
+            Id = x.Id,
             StartDateTime = x.StartDatetime,
             TimeLimit = x.TimeLimitDatetime,
             TopicInfo = _catalogService.GetTopic(x.TopicId),
@@ -104,6 +105,7 @@ public class CheckController : ControllerBase
         return Ok(sessions.Select(x => new SessionResponse()
         {
             Success = true,
+            Id = x.Id,
             StartDateTime = x.StartDatetime,
             TimeLimit = x.TimeLimitDatetime,
             TopicInfo = _catalogService.GetTopic(x.TopicId),
@@ -138,6 +140,7 @@ public class CheckController : ControllerBase
         return Ok(sessions.Select(x => new SessionResponse()
         {
             Success = true,
+            Id = x.Id,
             StartDateTime = x.StartDatetime,
             TimeLimit = x.TimeLimitDatetime,
             TopicInfo = _catalogService.GetTopic(x.TopicId),

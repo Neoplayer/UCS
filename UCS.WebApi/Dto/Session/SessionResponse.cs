@@ -4,6 +4,7 @@ namespace UCS.WebApi.Dto.Session
 {
     public class SessionResponse : ResponseBase
     {
+        public int Id { get; set; }
         public TopicResponse TopicInfo { get; set; }
         public DateTime StartDateTime { get; set; }
         public DateTime TimeLimit { get; set; }
