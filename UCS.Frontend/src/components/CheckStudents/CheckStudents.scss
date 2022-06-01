@@ -307,10 +307,25 @@
         }
     }
 
+    .img-zoom-wraper {
+        max-width: 90vw !important;
+        max-height: 90vh !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .iiz__img {
+            max-width: 90vw !important;
+            // width: fit-content !important;
+            max-height: 90vh !important;
+            // height: fit-content !important;
+        }
+    }
+
     .img {
-        min-height: 100px;
-        min-width: 100px;
-        max-width: 90vw;
-        max-height: 90vh;
+        // min-height: 100px;
+        // min-width: 100px;
+        // max-width: 90vw !important;
+        // max-height: 90vh !important;
     }
 }

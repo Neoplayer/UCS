@@ -9,7 +9,7 @@ const FullScreenImg = ({ ImageGuid, setImageGuid }) => {
 
   return (
     <div className="FullScreenImg" onClick={() => setImageGuid(null)}>
-      <div onClick={(e) => e.stopPropagation()}>
+      <div className="img-zoom-wraper"  onClick={(e) => e.stopPropagation()}>
         <InnerImageZoom
           src={GetImageByGuid(ImageGuid)}
           zoomPreload={true}
