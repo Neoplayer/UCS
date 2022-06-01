@@ -7,6 +7,7 @@ namespace UCS.WebApi.Dto.Session
         public int Id { get; set; }
         public TopicResponse TopicInfo { get; set; }
         public DateTime StartDateTime { get; set; }
+        public DateTime? FinishDatetime { get; set; }
         public DateTime TimeLimit { get; set; }
         public TimeSpan TimeLeft { get; set; }
 
