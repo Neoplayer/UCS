@@ -43,20 +43,10 @@ export const HandleDrop = (
   setDragCounter(0);
 
   if (e.dataTransfer.files) {
-    // let filesSize = e.dataTransfer.files.length;
-    // let arr = [];
-    console.log("e.dataTransfer.files", e.dataTransfer.files);
+
     let file = e.dataTransfer.files.item(0);
-    console.log(file);
     if (file) {
       HandleUploadImg(file, index, questionId, UserFiles, setUserFiles, token);
     }
-    // for (let index = 0; index < filesSize; index++) {
-    //   let file = e.dataTransfer.files.item(index);
-    //   // let size = file.size / 1024 / 1024;
-    //   // size = size.toFixed(2);
-    //   arr.push(file);
-    // }
-    // HandleUpload(null, setFilesToUpload, FilesToUpload, arr);
   }
 };

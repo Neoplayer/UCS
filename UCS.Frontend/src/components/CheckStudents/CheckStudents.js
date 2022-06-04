@@ -21,7 +21,6 @@ const CheckStudents = () => {
   useEffect(() => {
     let onLoad = true;
     GetTestsToCheck(User.token).then((res) => {
-      console.log(res);
       if (onLoad) {
         if (res.message) {
           onLoad = true;
@@ -66,6 +65,7 @@ const CheckStudents = () => {
       <UsersAnswers
         TestToCheck={FilteredTestToCheck ? FilteredTestToCheck : TestToCheck}
         setImageGuid={setImageGuid}
+        UseHintBtn={true}
       />
       <Archive setImageGuid={setImageGuid} />
       <FullScreenImg ImageGuid={ImageGuid} setImageGuid={setImageGuid} />

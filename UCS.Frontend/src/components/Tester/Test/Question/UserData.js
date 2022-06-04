@@ -51,7 +51,6 @@ const UserData = ({
   }
 
   if (UserFiles[index].userData === null) return null;
-  console.log("UserFiles[index]", UserFiles[index]);
   URLuploadIMG = URL.createObjectURL(UserFiles[index].userData.data);
 
   return (

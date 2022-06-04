@@ -1,7 +1,13 @@
 import React, { useContext } from "react";
 import UserAnswer from "./UserAnswer";
+import "./CheckStudents.scss";
 
-const UsersAnswers = ({ TestToCheck, setImageGuid, isAnsweredAlready = false }) => {
+const UsersAnswers = ({
+  TestToCheck,
+  setImageGuid,
+  isAnsweredAlready = false,
+  UseHintBtn = false,
+}) => {
   if (!TestToCheck) return null;
 
   if (TestToCheck.length === 0)
@@ -13,7 +19,8 @@ const UsersAnswers = ({ TestToCheck, setImageGuid, isAnsweredAlready = false }) 
         key={index}
         UserData={el.user}
         TaskData={el.questions}
-        Time={el.startDateTime}
+        TimeStart={el.startDateTime}
+        TimeFinish={el.finishDatetime}
         TaskInfo={el.topicInfo}
         Index={index + 1}
         setImageGuid={setImageGuid}
@@ -21,10 +28,11 @@ const UsersAnswers = ({ TestToCheck, setImageGuid, isAnsweredAlready = false }) 
         comment={el.comment}
         result={el.result}
         isAnsweredAlready={isAnsweredAlready}
+        UseHintBtn={UseHintBtn}
       />
     );
   });
-  return <ul className="users">{TestToCheckMap}</ul>;
+  return <ul className="users-data">{TestToCheckMap}</ul>;
 };
 
 export default UsersAnswers;

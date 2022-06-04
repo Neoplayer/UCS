@@ -1,13 +1,18 @@
 import React from "react";
 import { GetImageByGuid } from "../../api/api";
+import "./CheckStudents.scss";
 
-const CurrentAnswer = ({ index, setImageGuid, task }) => {
+const CurrentAnswer = ({ index, setImageGuid, task, UseHintBtn }) => {
   return (
     <div className="check-wrapper" key={index}>
       <p className="question">
         <span className="num">{index + 1}.</span> {task.body}
       </p>
-      <button className="extraImg-btn" onClick={() => setImageGuid(task.hintImageId)}>
+      <button
+        className="extraImg-btn"
+        onClick={() => setImageGuid(task.hintImageId)}
+        hidden={!UseHintBtn}
+      >
         Открыть подсказку
       </button>
       <div className="img-wrapper">

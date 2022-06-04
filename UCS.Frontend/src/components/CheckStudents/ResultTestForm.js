@@ -14,7 +14,6 @@ const ResultTestForm = ({ sessionId, result, comment, isAnsweredAlready }) => {
     const comment = e.target[1]?.value;
 
     await sendResultToTest(User.token, sessionId, result, comment).then((res) => {
-      console.log(res);
       if (res.status === 200) {
         onAlert("Результат за КР отправлен на сервер!");
         setIsSentResult(true);

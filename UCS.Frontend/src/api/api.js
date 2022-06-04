@@ -103,3 +103,10 @@ export const GetArchive = async (token) => {
     response.json(),
   );
 };
+
+
+export const GetCheckedTests = async (token) => {
+  return await FetchReq("/Check/GetCheckedTests", token).then((response) =>
+    response.json(),
+  );
+};

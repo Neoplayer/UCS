@@ -1,13 +1,13 @@
 import React, { useMemo, useState } from "react";
-import { motion } from "framer-motion";
-import { GetImageByGuid } from "../../api/api";
 import ResultTestForm from "./ResultTestForm";
 import CurrentAnswer from "./CurrentAnswer";
+import "./CheckStudents.scss";
 
 const UserAnswer = ({
   UserData,
   TaskData,
-  Time,
+  TimeStart,
+  TimeFinish,
   TaskInfo,
   Index,
   setImageGuid,
@@ -15,12 +15,21 @@ const UserAnswer = ({
   comment,
   result,
   isAnsweredAlready,
+  UseHintBtn
 }) => {
   const [ActivateCheck, SetActivateCheck] = useState(false);
 
-  let date = useMemo(() => new Date(Time), [Time]);
+  let dateStart = useMemo(() => new Date(TimeStart), [TimeStart]);
+  let dateFinish = useMemo(() => new Date(TimeFinish), [TimeFinish]);
 
-  date = date.toLocaleDateString("ru-RU", {
+  dateStart = dateStart.toLocaleDateString("ru-RU", {
+    day: "2-digit",
+    year: "numeric",
+    month: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  dateFinish = dateFinish.toLocaleDateString("ru-RU", {
     day: "2-digit",
     year: "numeric",
     month: "2-digit",
@@ -30,7 +39,13 @@ const UserAnswer = ({
 
   const LetsCheck = TaskData.map((task, index) => {
     return (
-      <CurrentAnswer key={index} setImageGuid={setImageGuid} task={task} index={index} />
+      <CurrentAnswer
+        key={index}
+        setImageGuid={setImageGuid}
+        task={task}
+        index={index}
+        UseHintBtn={UseHintBtn}
+      />
     );
   });
 
@@ -53,7 +68,7 @@ const UserAnswer = ({
 
         <p className="date-pass">
           <span className="space-divider">|</span>
-          {date}
+          {dateStart} {" ➜ "} {dateFinish}
         </p>
       </div>
       {ActivateCheck && LetsCheck}

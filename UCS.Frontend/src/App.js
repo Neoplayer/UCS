@@ -18,7 +18,7 @@ import MobileQR from "./components/MobileQR/MobileQR";
 const App = () => {
   const navigate = useNavigate();
   let location = useLocation();
-  
+
   const [User, setUser] = useState({
     user: {
       id: null,
@@ -78,7 +78,14 @@ const App = () => {
               </RequireAuth>
             }
           />
-          <Route path="academicPerformance" element={<AcademicPerformance />} />
+          <Route
+            path="academicPerformance"
+            element={
+              <RequireAuth>
+                <AcademicPerformance />
+              </RequireAuth>
+            }
+          />
           <Route
             path="checkStudents"
             element={
